@@ -1,47 +1,38 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+    import { wrap } from 'svelte-spa-router/wrap';
+    import Router from 'svelte-spa-router';
+
+    // Importiere die Unterseiten
+
+    import Hub from './routes/Hub.svelte';
+    import Missions from './routes/Missions.svelte';
+    import Research from './routes/Research.svelte';
+    import Journal from './routes/Journal.svelte';
+
+    // Definiere die Routen
+    const routes = {
+        '/': wrap(() => import('./routes/Hub.svelte')),
+    '/missions': wrap(() => import('./routes/Missions.svelte')),
+    '/research': wrap(() => import('./routes/Research.svelte')),
+    '/journal': wrap(() => import('./routes/Journal.svelte')),
+
+    };
 </script>
 
 <main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+    <header>
+        <nav>
+            <a href="#/">Home</a>
+            <a href="#/missions">Missionen</a>
+            <a href="#/research">Forschung</a>
+            <a href="#/journal">Logbuch</a>
+        </nav>
+    </header>
 
-  <div class="card">
-    <Counter />
-  </div>
+    <!-- Der Router rendert hier die entsprechenden Seiten -->
+    <Router {routes} />
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+    <footer>
+        <p>© 2025 Ocean Research Simulator</p>
+    </footer>
 </main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
