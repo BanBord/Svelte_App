@@ -1,5 +1,22 @@
-<!-- @format -->
 <script>
+  import { createEventDispatcher } from 'svelte';
+
+  export let id;
+
+  const dispatch = createEventDispatcher();
+
+  function handleDrop(event) {
+    event.preventDefault();
+    const vesselId = event.dataTransfer.getData('text/plain');
+    console.log(`SeaPlot ${id} received drop event with vesselId: ${vesselId}`);
+    dispatch('drop', { plotId: id, vesselId });
+  }
+
+  function handleDragOver(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }
+
   function getRandomBlueColor() {
     const blueShades = ["#0000FF", "#0000CD", "#00008B", "#000080", "#191970", "#4169E1", "#4682B4", "#5F9EA0", "#6495ED", "#87CEEB"];
     const randomIndex = Math.floor(Math.random() * blueShades.length);
@@ -9,16 +26,21 @@
   const randomBlueColor = getRandomBlueColor();
 </script>
 
-
-<div class="random-blue-background" style="background-color: {randomBlueColor};">
-    <!-- Your content here -->
-  </div>
-  
+<div
+  class="random-blue-background sea-plot"
+  id={id}
+  data-plot-id={id}
+  on:drop={handleDrop}
+  on:dragover={handleDragOver}
+  style="background-color: {randomBlueColor};"
+>
+  <slot></slot>
+</div>
 
 <style>
-        .random-blue-background {
-            /* background-color will be set inline */
-        }
+  .random-blue-background {
+    width: 100%;
+    height: 100%;
+    /* background-color will be set inline */
+  }
 </style>
-
-
