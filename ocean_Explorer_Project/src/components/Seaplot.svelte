@@ -1,4 +1,5 @@
 <script>
+  import Fish from './Fish.svelte';
   import { createEventDispatcher } from 'svelte';
 
   export let id;
@@ -42,5 +43,10 @@
     width: 100%;
     height: 100%;
     /* background-color will be set inline */
+  }
+  .sea-plot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

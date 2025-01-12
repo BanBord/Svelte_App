@@ -24,14 +24,15 @@ function handleDragStart(event) {
 <style>
 #researchvessel {
     cursor: grab;
-    width: 50px;
-    height: 50px;
-    background-color: #3498db;
+    width: 20px;
+    height: 20px;
+    background-color: #626262;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 #researchvessel:active {
