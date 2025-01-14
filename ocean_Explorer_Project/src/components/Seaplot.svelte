@@ -1,10 +1,21 @@
 <script>
+  import { onMount } from 'svelte';
   import Fish from './Fish.svelte';
   import { createEventDispatcher } from 'svelte';
 
   export let id;
 
   const dispatch = createEventDispatcher();
+  let fishData = [];
+
+  // async function fetchFishData() {
+  //   const response = await fetch(`https://api.obis.org/v3/occurrence?geometry=${id}`);
+  //   const data = await response.json();
+  //   fishData = data.results.map(fish => ({
+  //     species: fish.species,
+  //     count: fish.individualCount
+  //   }));
+  // }
 
   function handleDrop(event) {
     event.preventDefault();
@@ -25,6 +36,10 @@
   }
 
   const randomBlueColor = getRandomBlueColor();
+
+  onMount(() => {
+    fetchFishData();
+  });
 </script>
 
 <div
@@ -35,6 +50,9 @@
   on:dragover={handleDragOver}
   style="background-color: {randomBlueColor};"
 >
+  {#each fishData as fish}
+    <Fish {fishData} />
+  {/each}
   <slot></slot>
 </div>
 
