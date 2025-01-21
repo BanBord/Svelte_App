@@ -41,7 +41,7 @@ main {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-  }
+}
 
   .nav-button:hover {
     background-color: #005f9e;
@@ -51,3 +51,19 @@ main {
     max-width: 100px;
     cursor: pointer;
   }
+
+  .active-mission {
+    font-weight: bold;
+    color: #007BFF;
+    background-color: #e0f7ff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.active-mission:hover {
+    background-color: #cceeff;
+}
+
+  
