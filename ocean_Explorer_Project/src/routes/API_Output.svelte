@@ -8,6 +8,8 @@
 -->
 <script>
     import { onMount } from "svelte";
+    import { fishDataStore, loadingStore, errorStore } from '../stores/localStore.js';
+  
     
     let fishData = [];
     let loading = false;

@@ -1,12 +1,24 @@
 <script>
-  import SeaPlot from "../components/Seaplot.svelte";
+  import SeaPlot from "../components/SeaPlot.svelte";
   import Researchvessel from "../components/Researchvessel.svelte";
+  import Modal from "../components/Fish.svelte";
   import { onMount } from "svelte";
+  import { fetchFishData, fishDataStore } from '../stores/localStore';
+  import { get } from 'svelte/store';
+  
+  const seaConfigs = {
+    'East China Sea': { areaId: 40047 },
+    'Norwegian Sea': { areaId: 32353 },
+    'Gulf of Alaska': { areaId: 40002 }
+  };
 
-  let selectedSea = "Deutsche Ostseeküste"; // Default selected sea
+  let selectedSea = "East China Sea"; // Default selected sea
+  let isModalOpen = false;
+  let selectedFishData = null;
 
   function handleSeaSelection(sea) {
     selectedSea = sea;
+    fetchFishData(seaConfigs[sea].areaId);
   }
 
   function getGridPosition(index) {
@@ -14,6 +26,11 @@
       x: index % 16,
       y: Math.floor(index / 16)
     };
+  }
+
+  function handleShowFishData(event) {
+    selectedFishData = event.detail.fishData;
+    isModalOpen = true;
   }
 
   // Create a 16x16 grid of sea plots with unique IDs and names
@@ -52,6 +69,9 @@
     });
     console.log("Event listeners added to sea plots");
   });
+
+  // Fetch initial fish data for the default selected sea
+  fetchFishData(seaConfigs[selectedSea].areaId);
 </script>
 
 <div class="content">
@@ -62,7 +82,9 @@
             id={plot.id} 
             position={getGridPosition(plot.id)}
             seaVariant={selectedSea}
+            fishData={get(fishDataStore)}
             on:drop={handleDrop}
+            on:showFishData={handleShowFishData}
             >
           {#if vesselPosition == plot.id}
             <Researchvessel />
@@ -80,27 +102,27 @@
         <h2>Marine Area</h2>
       <button 
         type="button"
-        class="e-sea toggle-button {selectedSea === 'Deutsche Ostseeküste' ? 'active' : ''}"
-        on:click={() => handleSeaSelection('Deutsche Ostseeküste')}
-        on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('Deutsche Ostseeküste')}
+        class="e-sea toggle-button {selectedSea === 'East China Sea' ? 'active' : ''}"
+        on:click={() => handleSeaSelection('East China Sea')}
+        on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('East China Sea')}
       >
-        Deutsche Ostseeküste
+        East China Sea
       </button>
       <button 
         type="button"
-        class="i-oeaz toggle-button {selectedSea === 'Andaman-See vor Myanmar' ? 'active' : ''}"
-        on:click={() => handleSeaSelection('Andaman-See vor Myanmar')}
-        on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('Andaman-See vor Myanmar')}
+        class="i-oeaz toggle-button {selectedSea === 'Norwegian Sea' ? 'active' : ''}"
+        on:click={() => handleSeaSelection('Norwegian Sea')}
+        on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('Norwegian Sea')}
       >
-        Andaman-See vor Myanmar
+        Norwegian Sea
       </button>
         <button 
             type="button"
-            class="sou-chin-sea toggle-button {selectedSea === 'Golf von Alaska' ? 'active' : ''}"
-            on:click={() => handleSeaSelection('Golf von Alaska')}
-            on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('Golf von Alaska')}
+            class="sou-chin-sea toggle-button {selectedSea === 'Gulf of Alaska' ? 'active' : ''}"
+            on:click={() => handleSeaSelection('Gulf of Alaska')}
+            on:keydown={(e) => e.key === 'Enter' && handleSeaSelection('Gulf of Alaska')}
         >
-            Golf von Alaska
+            Gulf of Alaska
         </button>
       </div>
       <div class="vessel-container">
@@ -111,6 +133,8 @@
     </div>
   </div>
 </div>
+
+<Modal {isModalOpen} {selectedFishData} />
 
 <style>
   .content {

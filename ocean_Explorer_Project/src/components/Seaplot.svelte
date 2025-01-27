@@ -3,27 +3,39 @@
   import Fish from './Fish.svelte';
   import { createEventDispatcher } from 'svelte';
   import depthData from '../assets/depthdata.json';
+  import { fishDataStore } from '../stores/localStore';
+  import { get } from 'svelte/store';
 
   export let id;
   export let position;
   export let seaVariant;
 
   const dispatch = createEventDispatcher();
-  let fishData = [];
   let depth;
   let depthColor = '#B0C4DE';
 
   const seaConfigs = {
-    'Deutsche Ostseeküste': {
+    'East China Sea': {
       colorRange: { shallow: '#708090', middle: '#4A6741', deep: '#607D8B' }
     },
-    'Andaman-See vor Myanmar': {
+    'Norwegian Sea': {
       colorRange: { shallow: '#A7EAE2', middle: '#A7EAE2', deep: '#003366' }
     },
-    'Golf von Alaska': {
+    'Gulf of Alaska': {
       colorRange: { shallow: '#4EACC4', middle: '#0077BE', deep: '#003366' }
     }
   };
+
+  $: if (seaVariant && position) {
+    calculateDepth();
+  }
+  
+  function handleClick() {
+    const fishData = get(fishDataStore).find(fish => fish.depth === depth);
+    console.log(`SeaPlot ${id} clicked, depth: ${depth}, fishData:`, fishData);
+
+    dispatch('showFishData', { fishData });
+  }
 
   function calculateDepth() {
     const config = seaConfigs[seaVariant];
@@ -96,25 +108,32 @@
     event.dataTransfer.dropEffect = 'move';
   }
 
+  // Filter fish data based on depth
+  let filteredFishData = [];
+  $: filteredFishData = get(fishDataStore).filter(fish => fish.depth === depth);
+
   onMount(() => {
     calculateDepth();
+    // console.log(`SeaPlot ${id} mounted, fishDataStore:`, get(fishDataStore));
   });
 </script>
 
-<div
+<button
+  type="button"
   class="random-blue-background sea-plot"
   id={id}
   depth={depth}
   data-plot-id={id}
   on:drop={handleDrop}
   on:dragover={handleDragOver}
+  on:click={handleClick}
   style="background-color: {depthColor};"
 >
-  {#each fishData as fish}
-    <Fish {fishData} />
+  {#each filteredFishData as fish}
+    <Fish fishData={fish} />
   {/each}
   <slot></slot>
-</div>
+</button>
 
 <style>
   .random-blue-background {
@@ -128,5 +147,4 @@
     align-items: center;
     transition: background-color 0.3s ease;
   }
-
 </style>

@@ -1,68 +1,54 @@
-<!-- <script>
-  import { onMount } from 'svelte';
+<script>
+  export let isOpen = false;
+  export let fishData = null;
 
-  // Variablen für die Ergebnisse
-  let species = {
-    balticSea: [],
-    gulfOfAlaska: [],
-    andamanSea: []
-  };
-
-  // AREA IDs für die Meeresgebiete
-  const areaIds = {
-    balticSea: 95, // Deutsche Ostsee
-    gulfOfAlaska: 265, // Golf von Alaska
-    andamanSea: 34274 // Andaman-See
-  };
-
-  const taxonClass = 'Teleostei'; // Klasse der Fische
-
-  // Daten beim Mount der Komponente abrufen
-  onMount(async () => {
-    await fetchSpecies('balticSea');
-    await fetchSpecies('gulfOfAlaska');
-    await fetchSpecies('andamanSea');
-  });
-
-  // Funktion zum Abrufen der Spezies
-  async function fetchSpecies(region) {
-    const response = await fetch(`https://api.obis.org/v3/occurrence?areaid=${areaIds[region]}&taxon_class=${taxonClass}`);
-    const data = await response.json();
-    species[region] = data.results.map(item => item.scientificName);
+  function closeModal() {
+    isOpen = false;
   }
 </script>
 
+{#if isOpen}
+  <div class="modal-overlay" on:click={closeModal}>
+    <div class="modal-content" on:click|stopPropagation>
+      <button class="close-button" on:click={closeModal}>X</button>
+      <h2>Fish Data</h2>
+      {#if fishData}
+        <ul>
+          <li><strong>Name:</strong> {fishData.name}</li>
+          <li><strong>Depth:</strong> {fishData.depth}</li>
+          <li><strong>Species:</strong> {fishData.species}</li>
+          <!-- Add more fish data fields as needed -->
+        </ul>
+      {/if}
+    </div>
+  </div>
+{/if}
+
 <style>
-  h2 {
-    margin-top: 2rem;
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  ul {
-    margin-left: 1rem;
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative;
+  }
+  .close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
   }
 </style>
-
-<h1>Fischspezies in verschiedenen Meeresgebieten</h1>
-
-<h2>Deutsche Ostsee</h2>
-<h3>Alle Fischarten</h3>
-<ul>
-  {#each species.balticSea as fish}
-    <li>{fish}</li>
-  {/each}
-</ul>
-
-<h2>Golf von Alaska</h2>
-<h3>Alle Fischarten</h3>
-<ul>
-  {#each species.gulfOfAlaska as fish}
-    <li>{fish}</li>
-  {/each}
-</ul>
-
-<h2>Andaman-See</h2>
-<h3>Alle Fischarten</h3>
-<ul>
-  {#each species.andamanSea as fish}
-    <li>{fish}</li>
-  {/each}
-</ul> -->
