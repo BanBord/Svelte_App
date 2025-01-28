@@ -4,7 +4,16 @@ export const fishDataStore = writable([]);
 export const loadingStore = writable(false);
 export const errorStore = writable(null);
 
+// Cache object to store fetched data
+const fishDataCache = {};
+
 export async function fetchFishData(areaId) {
+  // Check if data is already in cache
+  if (fishDataCache[areaId]) {
+    fishDataStore.set(fishDataCache[areaId]);
+    return;
+  }
+
   loadingStore.set(true);
   errorStore.set(null);
 
@@ -16,6 +25,7 @@ export async function fetchFishData(areaId) {
     const data = await response.json();
     console.log('API Response:', data); // Log the API response
     fishDataStore.set(data.results);
+    fishDataCache[areaId] = data.results; // Store data in cache
     console.log('Fish Data Store:', data.results); // Log the data being set in the store
 
     // Log the depth data for the areas

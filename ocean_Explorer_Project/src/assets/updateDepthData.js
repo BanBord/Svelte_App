@@ -28,6 +28,17 @@ function spreadFishDataOnGrid(fishData, rows, columns, minDepth, maxDepth) {
     grid[row][col] = fish.depth;
   });
 
+  // Spread remaining fish data evenly if there are fewer fish than grid cells
+  let fishIndex = 0;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < columns; col++) {
+      if (grid[row][col] === null && fishIndex < fishData.length) {
+        grid[row][col] = fishData[fishIndex].depth;
+        fishIndex++;
+      }
+    }
+  }
+
   // Interpolate missing values
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < columns; col++) {
