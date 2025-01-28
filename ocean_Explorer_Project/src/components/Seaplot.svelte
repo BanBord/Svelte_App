@@ -29,12 +29,18 @@
   $: if (seaVariant && position) {
     calculateDepth();
   }
-  
-  function handleClick() {
-    const fishData = get(fishDataStore).find(fish => fish.depth === depth);
-    console.log(`SeaPlot ${id} clicked, depth: ${depth}, fishData:`, fishData);
+  let isOpen = false;
+  let selectedFishData = null;
 
-    dispatch('showFishData', { fishData });
+  function handleClick() {
+    selectedFishData = get(fishDataStore).find(fish => fish.depth === depth);
+    console.log(`SeaPlot ${id} clicked, depth: ${depth}, fishData:`, selectedFishData);
+
+    isOpen = true;
+  }
+
+  function closeModal() {
+    isOpen = false;
   }
 
   function calculateDepth() {
@@ -50,10 +56,10 @@
     depth = region.depths[row][col];
 
     const { shallow, middle, deep } = config.colorRange;
-    depthColor = getDepthColor(depth, config.maxDepth, shallow, middle, deep);
+    depthColor = getDepthColor(depth, shallow, middle, deep);
   }
 
-  function getDepthColor(depth, maxDepth, shallow, middle, deep) {
+  function getDepthColor(depth, shallow, middle, deep) {
     const region = depthData.regions.find(region => region.name === seaVariant);
     if (!region) return deep;
 
@@ -108,13 +114,39 @@
     event.dataTransfer.dropEffect = 'move';
   }
 
-  // Filter fish data based on depth
+  // Filter fish data based on depth and select only one fish per cell
   let filteredFishData = [];
-  $: filteredFishData = get(fishDataStore).filter(fish => fish.depth === depth);
+  $: {
+    const fishData = get(fishDataStore);
+    const fishByDepth = fishData.filter(fish => fish.depth === depth);
+    if (fishByDepth.length > 0) {
+      filteredFishData = [fishByDepth[0]]; // Select only one fish per cell
+    } else {
+      filteredFishData = [];
+    }
+  }
+
+  function logFishTypesByArea() {
+    const fishData = get(fishDataStore);
+    const fishTypesByArea = {};
+
+    fishData.forEach(fish => {
+      const area = fish.area;
+      if (!fishTypesByArea[area]) {
+        fishTypesByArea[area] = new Set();
+      }
+      fishTypesByArea[area].add(fish.species);
+    });
+
+    Object.keys(fishTypesByArea).forEach(area => {
+      console.log(`Area: ${area}, Fish Types: ${Array.from(fishTypesByArea[area]).join(', ')}`);
+    });
+  }
 
   onMount(() => {
     calculateDepth();
-    // console.log(`SeaPlot ${id} mounted, fishDataStore:`, get(fishDataStore));
+    console.log(`SeaPlot ${id} mounted, fishDataStore:`, get(fishDataStore));
+    logFishTypesByArea();
   });
 </script>
 
@@ -127,13 +159,15 @@
   on:drop={handleDrop}
   on:dragover={handleDragOver}
   on:click={handleClick}
-  style="background-color: {depthColor};"
+  style="background-color: {filteredFishData.length > 0 ? 'orange' : depthColor};"
 >
   {#each filteredFishData as fish}
     <Fish fishData={fish} />
   {/each}
   <slot></slot>
 </button>
+
+<Fish {isOpen} fishData={selectedFishData} on:close={closeModal} />
 
 <style>
   .random-blue-background {

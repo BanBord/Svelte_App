@@ -134,7 +134,7 @@
   </div>
 </div>
 
-<Modal {isModalOpen} {selectedFishData} />
+<Modal isOpen={isModalOpen} {selectedFishData} />
 
 <style>
   .content {
