@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
+  import { discoveredSpecies } from '../stores/journalStore';
 
   export let isOpen = false;
   export let fishData = null;
-  export let depthData = null; // Accept depthData as a prop
 
   const dispatch = createEventDispatcher();
   let wikiData = null;
@@ -29,7 +29,10 @@
         console.log(`Falling back to genus search: ${genus}`);
         data = await tryWikiSearch(genus);
       }
-
+      // If data is found, check for common name
+      if (data && data.titles && data.titles.normalized) {
+        data.commonName = data.titles.normalized;
+      }
       if (data) {
         localStorage.setItem(`wikiData_${scientificName}`, JSON.stringify(data));
       }
@@ -40,13 +43,29 @@
     }
   }
 
+  function saveToJournal(wikiData, fishData) {
+    discoveredSpecies.update(species => {
+      if (!species.some(s => s.scientificName === fishData.scientificName)) {
+        return [...species, { 
+          ...wikiData,
+          scientificName: fishData.scientificName,
+          depth: fishData.depth,
+          discoveredAt: new Date().toISOString()
+        }];
+      }
+      return species;
+    });
+  }
+
   $: if (isOpen && fishData?.scientificName) {
     const cachedData = localStorage.getItem(`wikiData_${fishData.scientificName}`);
     if (cachedData) {
       wikiData = JSON.parse(cachedData);
+      saveToJournal(wikiData, fishData);
     } else {
       fetchWikiData(fishData.scientificName).then(data => {
         wikiData = data;
+        saveToJournal(wikiData, fishData);
       });
     }
   }
