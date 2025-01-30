@@ -14,112 +14,400 @@
       },
       "depths": [
         [
-          60,
-          65.52631578947368,
-          71.05263157894737,
-          76.57894736842105,
-          82.10526315789474,
-          87.63157894736842,
-          93.15789473684211,
-          98.68421052631578,
-          104.21052631578948,
-          109.73684210526315,
-          115.26315789473685,
-          120.78947368421052,
-          126.31578947368422,
-          131.84210526315792,
-          137.36842105263156,
-          142.89473684210526
+          {
+            "depth": -45,
+            "species": "Chromis notata"
+          },
+          {
+            "depth": -8,
+            "species": "Cheilodipterus macrodon"
+          },
+          {
+            "depth": -9,
+            "species": "Trachurus"
+          },
+          {
+            "depth": -1,
+            "species": "Antennarius striatus"
+          },
+          {
+            "depth": -125,
+            "species": "Oplegnathus punctatus"
+          },
+          {
+            "depth": -1,
+            "species": "Caranx ignobilis"
+          },
+          {
+            "depth": -3,
+            "species": "Plectorhinchus cinctus"
+          },
+          {
+            "depth": -43,
+            "species": "Chelidonichthys spinosus"
+          },
+          {
+            "depth": -40,
+            "species": "Lepidotrigla hime"
+          },
+          {
+            "depth": -24,
+            "species": "Sebastes schlegelii"
+          },
+          {
+            "depth": -292,
+            "species": "Serranidae"
+          },
+          {
+            "depth": -59,
+            "species": "Lophiomus setigerus"
+          },
+          {
+            "depth": -2,
+            "species": "Fistularia commersonii"
+          },
+          {
+            "depth": -11,
+            "species": "Setarches longimanus"
+          },
+          {
+            "depth": -19,
+            "species": "Sebastes pachycephalus"
+          },
+          {
+            "depth": -135,
+            "species": "Cookeolus japonicus"
+          }
         ],
         [
-          148.42105263157896,
-          153.94736842105263,
-          159.4736842105263,
-          139.5,
-          170.5263157894737,
-          176.05263157894737,
-          181.57894736842104,
-          187.10526315789474,
-          192.63157894736844,
-          432.5,
-          203.6842105263158,
-          209.21052631578948,
-          214.73684210526315,
-          220.26315789473685,
-          225.78947368421052,
-          231.31578947368422
+          {
+            "depth": -87,
+            "species": "Stephanolepis cirrhifer"
+          },
+          {
+            "depth": -1,
+            "species": "Oligolepis acutipennis"
+          },
+          {
+            "depth": -58,
+            "species": "Parapercis pulchella"
+          },
+          {
+            "depth": 139.5,
+            "species": "Plagiopsetta glossa"
+          },
+          {
+            "depth": -66,
+            "species": "Cynoglossus abbreviatus"
+          },
+          {
+            "depth": -10,
+            "species": "Pseudolabrus sieboldi"
+          },
+          {
+            "depth": -61,
+            "species": "Eopsetta grigorjewi"
+          },
+          {
+            "depth": -104,
+            "species": "Pomacanthus sexstriatus"
+          },
+          {
+            "depth": -159,
+            "species": "Ostorhinchus fleurieu"
+          },
+          {
+            "depth": 432.5,
+            "species": "Coelorinchus anatirostris"
+          },
+          {
+            "depth": -492,
+            "species": "Myctophum"
+          },
+          {
+            "depth": -88,
+            "species": "Collichthys niveatus"
+          },
+          {
+            "depth": -36,
+            "species": "Alectis ciliaris"
+          },
+          {
+            "depth": -2,
+            "species": "Lateolabrax japonicus"
+          },
+          {
+            "depth": -14,
+            "species": "Scomber japonicus"
+          },
+          {
+            "depth": -2408,
+            "species": "Histiobranchus bathybius"
+          }
         ],
         [
-          130,
-          242.3684210526316,
-          585,
-          253.42105263157893,
-          258.9473684210526,
-          264.4736842105263,
-          270,
-          200,
-          281.0526315789474,
-          432.5,
-          292.10526315789474,
-          297.63157894736844,
-          303.1578947368421,
-          308.6842105263158,
-          314.2105263157895,
-          60
+          {
+            "depth": 130,
+            "species": "Chelidoperca hirundinacea"
+          },
+          {
+            "depth": -1,
+            "species": "Ostorhinchus notatus"
+          },
+          {
+            "depth": 585,
+            "species": "Diaphus suborbitalis"
+          },
+          {
+            "depth": -98,
+            "species": "Amblychaeturichthys sciistius"
+          },
+          {
+            "depth": -3,
+            "species": "Pempheris schwenkii"
+          },
+          {
+            "depth": -2,
+            "species": "Lampris guttatus"
+          },
+          {
+            "depth": -37,
+            "species": "Parapercis sexfasciata"
+          },
+          {
+            "depth": 200,
+            "species": "Callionymus valenciennei"
+          },
+          {
+            "depth": -7,
+            "species": "Bathygobius fuscus"
+          },
+          {
+            "depth": 432.5,
+            "species": "Diaphus chrysorhynchus"
+          },
+          {
+            "depth": -9,
+            "species": "Coelorinchus multispinulosus"
+          },
+          {
+            "depth": -136,
+            "species": "Thamnaconus modestoides"
+          },
+          {
+            "depth": -2,
+            "species": "Chaenogobius gulosus"
+          },
+          {
+            "depth": -56,
+            "species": "Sufflamen chrysopterum"
+          },
+          {
+            "depth": -6,
+            "species": "Ostracion immaculatum"
+          },
+          {
+            "depth": 60,
+            "species": "Sebastapistes strongia"
+          }
         ],
         [
-          90,
-          392,
-          336.3157894736842,
-          341.8421052631579,
-          347.3684210526316,
-          352.89473684210526,
-          358.42105263157896,
-          363.94736842105266,
-          369.4736842105263,
-          375,
-          380.5263157894737,
-          386.0526315789474,
-          391.57894736842104,
-          397.10526315789474,
-          402.63157894736844,
-          408.1578947368421
+          {
+            "depth": 392,
+            "species": "Diaphus chrysorhynchus"
+          },
+          {
+            "depth": -56,
+            "species": "Zeus faber"
+          },
+          {
+            "depth": -45,
+            "species": "Chromis notata"
+          },
+          {
+            "depth": -8,
+            "species": "Cheilodipterus macrodon"
+          },
+          {
+            "depth": -9,
+            "species": "Trachurus"
+          },
+          {
+            "depth": -1,
+            "species": "Antennarius striatus"
+          },
+          {
+            "depth": -125,
+            "species": "Oplegnathus punctatus"
+          },
+          {
+            "depth": -1,
+            "species": "Caranx ignobilis"
+          },
+          {
+            "depth": -3,
+            "species": "Plectorhinchus cinctus"
+          },
+          {
+            "depth": -43,
+            "species": "Chelidonichthys spinosus"
+          },
+          {
+            "depth": -40,
+            "species": "Lepidotrigla hime"
+          },
+          {
+            "depth": -24,
+            "species": "Sebastes schlegelii"
+          },
+          {
+            "depth": -292,
+            "species": "Serranidae"
+          },
+          {
+            "depth": -59,
+            "species": "Lophiomus setigerus"
+          },
+          {
+            "depth": -2,
+            "species": "Fistularia commersonii"
+          },
+          {
+            "depth": -11,
+            "species": "Setarches longimanus"
+          }
         ],
         [
-          413.6842105263158,
-          419.2105263157895,
-          424.7368421052632,
-          430.2631578947368,
-          435.7894736842105,
-          139.5,
-          446.84210526315786,
-          452.36842105263156,
-          457.89473684210526,
-          463.4210526315789,
-          468.9473684210526,
-          432.5,
-          480,
-          485.52631578947364,
-          491.05263157894734,
-          496.5789473684211
+          {
+            "depth": -19,
+            "species": "Sebastes pachycephalus"
+          },
+          {
+            "depth": -135,
+            "species": "Cookeolus japonicus"
+          },
+          {
+            "depth": -87,
+            "species": "Stephanolepis cirrhifer"
+          },
+          {
+            "depth": -1,
+            "species": "Oligolepis acutipennis"
+          },
+          {
+            "depth": -58,
+            "species": "Parapercis pulchella"
+          },
+          {
+            "depth": 139.5,
+            "species": "Plagiopsetta glossa"
+          },
+          {
+            "depth": -66,
+            "species": "Cynoglossus abbreviatus"
+          },
+          {
+            "depth": -10,
+            "species": "Pseudolabrus sieboldi"
+          },
+          {
+            "depth": -61,
+            "species": "Eopsetta grigorjewi"
+          },
+          {
+            "depth": -104,
+            "species": "Pomacanthus sexstriatus"
+          },
+          {
+            "depth": -159,
+            "species": "Ostorhinchus fleurieu"
+          },
+          {
+            "depth": 432.5,
+            "species": "Coelorinchus anatirostris"
+          },
+          {
+            "depth": -492,
+            "species": "Myctophum"
+          },
+          {
+            "depth": -88,
+            "species": "Collichthys niveatus"
+          },
+          {
+            "depth": -36,
+            "species": "Alectis ciliaris"
+          },
+          {
+            "depth": -2,
+            "species": "Lateolabrax japonicus"
+          }
         ],
         [
-          502.10526315789474,
-          507.63157894736844,
-          130,
-          518.6842105263158,
-          585,
-          529.7368421052631,
-          535.2631578947369,
-          540.7894736842105,
-          546.3157894736842,
-          200,
-          557.3684210526316,
-          432.5,
-          568.421052631579,
-          573.9473684210526,
-          579.4736842105262,
-          585
+          {
+            "depth": -14,
+            "species": "Scomber japonicus"
+          },
+          {
+            "depth": -2408,
+            "species": "Histiobranchus bathybius"
+          },
+          {
+            "depth": 130,
+            "species": "Chelidoperca hirundinacea"
+          },
+          {
+            "depth": -1,
+            "species": "Ostorhinchus notatus"
+          },
+          {
+            "depth": 585,
+            "species": "Diaphus suborbitalis"
+          },
+          {
+            "depth": -98,
+            "species": "Amblychaeturichthys sciistius"
+          },
+          {
+            "depth": -3,
+            "species": "Pempheris schwenkii"
+          },
+          {
+            "depth": -2,
+            "species": "Lampris guttatus"
+          },
+          {
+            "depth": -37,
+            "species": "Parapercis sexfasciata"
+          },
+          {
+            "depth": 200,
+            "species": "Callionymus valenciennei"
+          },
+          {
+            "depth": -7,
+            "species": "Bathygobius fuscus"
+          },
+          {
+            "depth": 432.5,
+            "species": "Diaphus chrysorhynchus"
+          },
+          {
+            "depth": -9,
+            "species": "Coelorinchus multispinulosus"
+          },
+          {
+            "depth": -136,
+            "species": "Thamnaconus modestoides"
+          },
+          {
+            "depth": -2,
+            "species": "Chaenogobius gulosus"
+          },
+          {
+            "depth": -56,
+            "species": "Sufflamen chrysopterum"
+          }
         ]
       ]
     },
@@ -137,112 +425,400 @@
       },
       "depths": [
         [
-          170,
-          185,
-          163,
-          200,
-          815,
-          80.68000029999999,
-          162,
-          392.15,
-          100,
-          208,
-          212,
-          153,
-          345,
-          37.5,
-          206,
-          239
+          {
+            "depth": 170,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 185,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 163,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 200,
+            "species": "Glyptocephalus cynoglossus"
+          },
+          {
+            "depth": 815,
+            "species": "Reinhardtius hippoglossoides"
+          },
+          {
+            "depth": 80.68000029999999,
+            "species": "Clupea harengus"
+          },
+          {
+            "depth": 162,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 392.15,
+            "species": "Hippoglossoides platessoides"
+          },
+          {
+            "depth": 100,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 208,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 212,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 153,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 345,
+            "species": "Brosme brosme"
+          },
+          {
+            "depth": 37.5,
+            "species": "Clupea harengus"
+          },
+          {
+            "depth": 206,
+            "species": "Scomber scombrus"
+          },
+          {
+            "depth": 239,
+            "species": "Trisopterus esmarkii"
+          }
         ],
         [
-          161,
-          374,
-          340,
-          163,
-          171.57894736842104,
-          180.1578947368421,
-          216.79500000000002,
-          366.255,
-          289.744995,
-          174,
-          223.05263157894737,
-          200,
-          240.21052631578945,
-          109.12,
-          154,
-          455.025
+          {
+            "depth": 161,
+            "species": "Argentina silus"
+          },
+          {
+            "depth": 374,
+            "species": "Sebastes mentella"
+          },
+          {
+            "depth": 340,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": -1,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": -9,
+            "species": "Ctenolabrus rupestris"
+          },
+          {
+            "depth": -82.4,
+            "species": "Gadus morhua"
+          },
+          {
+            "depth": 216.79500000000002,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 366.255,
+            "species": "Mallotus villosus"
+          },
+          {
+            "depth": 289.744995,
+            "species": "Artediellus atlanticus"
+          },
+          {
+            "depth": 174,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": -1,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 200,
+            "species": "Pollachius virens"
+          },
+          {
+            "depth": -98,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 109.12,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 154,
+            "species": "Argentina sphyraena"
+          },
+          {
+            "depth": 455.025,
+            "species": "Scomber scombrus"
+          }
         ],
         [
-          143,
-          130,
-          412.7649995,
-          0,
-          204,
-          164,
-          174.745,
-          163,
-          210,
-          351.7368421052632,
-          191.93,
-          368.89473684210526,
-          208,
-          386.05263157894734,
-          165,
-          136
+          {
+            "depth": 143,
+            "species": "Pollachius virens"
+          },
+          {
+            "depth": 130,
+            "species": "Microstomus kitt"
+          },
+          {
+            "depth": 412.7649995,
+            "species": "Artediellus atlanticus"
+          },
+          {
+            "depth": -2004.4,
+            "species": "Gadus morhua"
+          },
+          {
+            "depth": 204,
+            "species": "Gobiidae"
+          },
+          {
+            "depth": 164,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 174.745,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 163,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 210,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": -44,
+            "species": "Clupea harengus"
+          },
+          {
+            "depth": 191.93,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": -98,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 208,
+            "species": "Sebastes viviparus"
+          },
+          {
+            "depth": -4,
+            "species": "Agonus cataphractus"
+          },
+          {
+            "depth": 165,
+            "species": "Merluccius merluccius"
+          },
+          {
+            "depth": 136,
+            "species": "Melanogrammus aeglefinus"
+          }
         ],
         [
-          128.165,
-          222.07,
-          170,
-          185,
-          163,
-          200,
-          815,
-          80.68000029999999,
-          162,
-          392.15,
-          100,
-          208,
-          212,
-          153,
-          345,
-          37.5
+          {
+            "depth": 128.165,
+            "species": "Gadus morhua"
+          },
+          {
+            "depth": 222.07,
+            "species": "Argentina silus"
+          },
+          {
+            "depth": 170,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 185,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 163,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 200,
+            "species": "Glyptocephalus cynoglossus"
+          },
+          {
+            "depth": 815,
+            "species": "Reinhardtius hippoglossoides"
+          },
+          {
+            "depth": 80.68000029999999,
+            "species": "Clupea harengus"
+          },
+          {
+            "depth": 162,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 392.15,
+            "species": "Hippoglossoides platessoides"
+          },
+          {
+            "depth": 100,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 208,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 212,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 153,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 345,
+            "species": "Brosme brosme"
+          },
+          {
+            "depth": 37.5,
+            "species": "Clupea harengus"
+          }
         ],
         [
-          206,
-          239,
-          161,
-          374,
-          340,
-          591.9473684210527,
-          600.5263157894736,
-          609.1052631578947,
-          216.79500000000002,
-          366.255,
-          289.744995,
-          174,
-          652,
-          200,
-          669.1578947368421,
-          109.12
+          {
+            "depth": 206,
+            "species": "Scomber scombrus"
+          },
+          {
+            "depth": 239,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 161,
+            "species": "Argentina silus"
+          },
+          {
+            "depth": 374,
+            "species": "Sebastes mentella"
+          },
+          {
+            "depth": 340,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": -1,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": -9,
+            "species": "Ctenolabrus rupestris"
+          },
+          {
+            "depth": -82.4,
+            "species": "Gadus morhua"
+          },
+          {
+            "depth": 216.79500000000002,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": 366.255,
+            "species": "Mallotus villosus"
+          },
+          {
+            "depth": 289.744995,
+            "species": "Artediellus atlanticus"
+          },
+          {
+            "depth": 174,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": -1,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 200,
+            "species": "Pollachius virens"
+          },
+          {
+            "depth": -98,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 109.12,
+            "species": "Trisopterus esmarkii"
+          }
         ],
         [
-          154,
-          455.025,
-          143,
-          130,
-          412.7649995,
-          0,
-          204,
-          164,
-          174.745,
-          163,
-          210,
-          780.6842105263157,
-          191.93,
-          797.8421052631579,
-          208,
-          815
+          {
+            "depth": 154,
+            "species": "Argentina sphyraena"
+          },
+          {
+            "depth": 455.025,
+            "species": "Scomber scombrus"
+          },
+          {
+            "depth": 143,
+            "species": "Pollachius virens"
+          },
+          {
+            "depth": 130,
+            "species": "Microstomus kitt"
+          },
+          {
+            "depth": 412.7649995,
+            "species": "Artediellus atlanticus"
+          },
+          {
+            "depth": -2004.4,
+            "species": "Gadus morhua"
+          },
+          {
+            "depth": 204,
+            "species": "Gobiidae"
+          },
+          {
+            "depth": 164,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": 174.745,
+            "species": "Trisopterus esmarkii"
+          },
+          {
+            "depth": 163,
+            "species": "Merlangius merlangus"
+          },
+          {
+            "depth": 210,
+            "species": "Micromesistius poutassou"
+          },
+          {
+            "depth": -44,
+            "species": "Clupea harengus"
+          },
+          {
+            "depth": 191.93,
+            "species": "Melanogrammus aeglefinus"
+          },
+          {
+            "depth": -98,
+            "species": "Salmo trutta"
+          },
+          {
+            "depth": 208,
+            "species": "Sebastes viviparus"
+          },
+          {
+            "depth": -4,
+            "species": "Agonus cataphractus"
+          }
         ]
       ]
     },
@@ -260,112 +836,400 @@
       },
       "depths": [
         [
-          4.5,
-          155,
-          9.931578947368422,
-          12.647368421052631,
-          15.363157894736842,
-          18.07894736842105,
-          178,
-          23.510526315789473,
-          26.226315789473684,
-          28.942105263157895,
-          31.657894736842103,
-          34.37368421052632,
-          37.089473684210525,
-          4.5,
-          42.52105263157895,
-          45.23684210526316
+          {
+            "depth": -144,
+            "species": "Mallotus villosus"
+          },
+          {
+            "depth": 155,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -42,
+            "species": "Oncorhynchus tshawytscha"
+          },
+          {
+            "depth": -9,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -272,
+            "species": "Sebastes ruberrimus"
+          },
+          {
+            "depth": 178,
+            "species": "Sebastes elongatus"
+          },
+          {
+            "depth": -29,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -7,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -2,
+            "species": "Liparis cyclopus"
+          },
+          {
+            "depth": -584,
+            "species": "Thaleichthys pacificus"
+          },
+          {
+            "depth": -77,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -98,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": 4.5,
+            "species": "Oncorhynchus nerka"
+          },
+          {
+            "depth": -248,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -97,
+            "species": "Sebastes proriger"
+          }
         ],
         [
-          47.95263157894737,
-          50.66842105263158,
-          53.38421052631579,
-          143,
-          58.815789473684205,
-          150,
-          123.5,
-          66.96315789473684,
-          119,
-          184.5,
-          78.5,
-          77.82631578947368,
-          80.5421052631579,
-          83.2578947368421,
-          85.97368421052632,
-          88.68947368421053
+          {
+            "depth": -201,
+            "species": "Microstomus pacificus"
+          },
+          {
+            "depth": -47,
+            "species": "Sebastes maliger"
+          },
+          {
+            "depth": -1,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": 143,
+            "species": "Hippoglossoides elassodon"
+          },
+          {
+            "depth": -62,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": 150,
+            "species": "Atheresthes stomias"
+          },
+          {
+            "depth": 123.5,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": -37,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": 119,
+            "species": "Thaleichthys pacificus"
+          },
+          {
+            "depth": 184.5,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": 78.5,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": -81,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -28,
+            "species": "Microgadus proximus"
+          },
+          {
+            "depth": -46,
+            "species": "Oncorhynchus keta"
+          },
+          {
+            "depth": -56,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": -47,
+            "species": "Lepidopsetta bilineata"
+          }
         ],
         [
-          262.5,
-          175.35000000000002,
-          96.83684210526316,
-          26,
-          102.26842105263158,
-          104.98421052631579,
-          107.7,
-          110.41578947368421,
-          113.13157894736841,
-          115.84736842105264,
-          118.56315789473683,
-          121.27894736842106,
-          64.5,
-          126.71052631578947,
-          129.42631578947368,
-          132.14210526315787
+          {
+            "depth": 262.5,
+            "species": "Microstomus pacificus"
+          },
+          {
+            "depth": 175.35000000000002,
+            "species": "Sebastes paucispinis"
+          },
+          {
+            "depth": -152,
+            "species": "Lepidopsetta"
+          },
+          {
+            "depth": 26,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": -86,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -10,
+            "species": "Oncorhynchus mykiss"
+          },
+          {
+            "depth": -269,
+            "species": "Lepidopsetta"
+          },
+          {
+            "depth": -90,
+            "species": "Pleuronectidae"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -17,
+            "species": "Oncorhynchus keta"
+          },
+          {
+            "depth": 64.5,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -1,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -42,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          }
         ],
         [
-          134.8578947368421,
-          137.57368421052632,
-          140.28947368421052,
-          155,
-          145.72105263157897,
-          148.43684210526314,
-          151.15263157894736,
-          153.8684210526316,
-          178,
-          159.29999999999998,
-          162.0157894736842,
-          164.73157894736843,
-          167.44736842105263,
-          170.16315789473686,
-          172.87894736842105,
-          4.5
+          {
+            "depth": -210,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -60,
+            "species": "Podothecus accipenserinus"
+          },
+          {
+            "depth": -144,
+            "species": "Mallotus villosus"
+          },
+          {
+            "depth": 155,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -42,
+            "species": "Oncorhynchus tshawytscha"
+          },
+          {
+            "depth": -9,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -272,
+            "species": "Sebastes ruberrimus"
+          },
+          {
+            "depth": 178,
+            "species": "Sebastes elongatus"
+          },
+          {
+            "depth": -29,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -7,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -2,
+            "species": "Liparis cyclopus"
+          },
+          {
+            "depth": -584,
+            "species": "Thaleichthys pacificus"
+          },
+          {
+            "depth": -77,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -98,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": 4.5,
+            "species": "Oncorhynchus nerka"
+          }
         ],
         [
-          178.31052631578947,
-          181.0263157894737,
-          183.7421052631579,
-          186.4578947368421,
-          189.17368421052632,
-          143,
-          194.60526315789474,
-          150,
-          123.5,
-          202.75263157894736,
-          119,
-          184.5,
-          78.5,
-          213.6157894736842,
-          216.33157894736843,
-          219.04736842105265
+          {
+            "depth": -248,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -97,
+            "species": "Sebastes proriger"
+          },
+          {
+            "depth": -201,
+            "species": "Microstomus pacificus"
+          },
+          {
+            "depth": -47,
+            "species": "Sebastes maliger"
+          },
+          {
+            "depth": -1,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": 143,
+            "species": "Hippoglossoides elassodon"
+          },
+          {
+            "depth": -62,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": 150,
+            "species": "Atheresthes stomias"
+          },
+          {
+            "depth": 123.5,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": -37,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": 119,
+            "species": "Thaleichthys pacificus"
+          },
+          {
+            "depth": 184.5,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": 78.5,
+            "species": "Gadus chalcogrammus"
+          },
+          {
+            "depth": -81,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -28,
+            "species": "Microgadus proximus"
+          },
+          {
+            "depth": -46,
+            "species": "Oncorhynchus keta"
+          }
         ],
         [
-          221.76315789473682,
-          224.47894736842105,
-          262.5,
-          175.35000000000002,
-          232.62631578947367,
-          26,
-          238.05789473684212,
-          240.7736842105263,
-          243.48947368421054,
-          246.20526315789473,
-          248.92105263157893,
-          251.63684210526316,
-          254.35263157894738,
-          257.0684210526316,
-          64.5,
-          262.5
+          {
+            "depth": -56,
+            "species": "Gadus macrocephalus"
+          },
+          {
+            "depth": -47,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": 262.5,
+            "species": "Microstomus pacificus"
+          },
+          {
+            "depth": 175.35000000000002,
+            "species": "Sebastes paucispinis"
+          },
+          {
+            "depth": -152,
+            "species": "Lepidopsetta"
+          },
+          {
+            "depth": 26,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": -86,
+            "species": "Lepidopsetta bilineata"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -10,
+            "species": "Oncorhynchus mykiss"
+          },
+          {
+            "depth": -269,
+            "species": "Lepidopsetta"
+          },
+          {
+            "depth": -90,
+            "species": "Pleuronectidae"
+          },
+          {
+            "depth": -43,
+            "species": "Clupea pallasii"
+          },
+          {
+            "depth": -17,
+            "species": "Oncorhynchus keta"
+          },
+          {
+            "depth": 64.5,
+            "species": "Parophrys vetulus"
+          },
+          {
+            "depth": -1,
+            "species": "Clupea pallasii"
+          }
         ]
       ]
     }

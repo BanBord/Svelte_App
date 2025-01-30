@@ -25,7 +25,10 @@ function spreadFishDataOnGrid(fishData, rows, columns, minDepth, maxDepth) {
   fishData.forEach((fish, index) => {
     const row = Math.floor(index / columns);
     const col = index % columns;
-    grid[row][col] = fish.depth;
+    grid[row][col] = {
+      depth: fish.depth || -Math.abs(fish.bathymetry),
+      species: fish.scientificName
+    };
   });
 
   // Spread remaining fish data evenly if there are fewer fish than grid cells
@@ -33,7 +36,10 @@ function spreadFishDataOnGrid(fishData, rows, columns, minDepth, maxDepth) {
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < columns; col++) {
       if (grid[row][col] === null && fishIndex < fishData.length) {
-        grid[row][col] = fishData[fishIndex].depth;
+        grid[row][col] = {
+          depth: fishData[fishIndex].depth || -Math.abs(fishData[fishIndex].bathymetry),
+          species: fishData[fishIndex].scientificName
+        };
         fishIndex++;
       }
     }
@@ -44,7 +50,10 @@ function spreadFishDataOnGrid(fishData, rows, columns, minDepth, maxDepth) {
     for (let col = 0; col < columns; col++) {
       if (grid[row][col] === null) {
         const progress = (row * columns + col) / (rows * columns - 1);
-        grid[row][col] = minDepth + progress * (maxDepth - minDepth);
+        grid[row][col] = {
+          depth: minDepth + progress * (maxDepth - minDepth),
+          species: null
+        };
       }
     }
   }
@@ -69,7 +78,7 @@ function spreadFishDataOnGrid(fishData, rows, columns, minDepth, maxDepth) {
     console.log(`Fish data for ${areaName}:`, fishData);
 
     if (fishData.length > 0) {
-      const depths = fishData.map(fish => fish.depth);
+      const depths = fishData.map(fish => fish.depth || -Math.abs(fish.bathymetry));
       const minDepth = Math.min(...depths);
       const maxDepth = Math.max(...depths);
 

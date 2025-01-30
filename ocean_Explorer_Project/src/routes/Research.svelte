@@ -1,8 +1,6 @@
 <script>
   import SeaPlot from "../components/SeaPlot.svelte";
-  import Researchvessel from "../components/Researchvessel.svelte";
   import Modal from "../components/Fish.svelte";
-  import { onMount } from "svelte";
   import { fetchFishData, fishDataStore } from '../stores/localStore';
   import { get } from 'svelte/store';
   
@@ -39,37 +37,6 @@
     name: `Plot ${index + 1}`,
   }));
 
-  // Variable to store the current position of the research vessel
-  let vesselPosition = null;
-
-  // Function to handle the drop event when a draggable element is dropped onto a sea plot
-  function handleDrop(event) {
-    const { plotId } = event.detail;
-    if (plotId !== undefined) {
-      vesselPosition = plotId;
-      console.log(`Vessel dropped in plot ID: ${vesselPosition}`);
-    } else {
-      console.warn("Drop event received with undefined plotId");
-    }
-  }
-
-  // Function to handle the drag over event to allow dropping
-  function handleDragOver(event) {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-    console.log("Drag over event");
-  }
-
-  // Add event listeners for drag and drop functionality when the component is mounted
-  onMount(() => {
-    const seaPlots = document.querySelectorAll(".sea-plot");
-    seaPlots.forEach((plot) => {
-      plot.addEventListener("dragover", handleDragOver);
-      plot.addEventListener("drop", handleDrop);
-    });
-    console.log("Event listeners added to sea plots");
-  });
-
   // Fetch initial fish data for the default selected sea
   fetchFishData(seaConfigs[selectedSea].areaId);
 </script>
@@ -82,15 +49,9 @@
             id={plot.id} 
             position={getGridPosition(plot.id)}
             seaVariant={selectedSea}
-            fishData={get(fishDataStore)}
-            on:drop={handleDrop}
-            on:showFishData={handleShowFishData}
             >
-          {#if vesselPosition == plot.id}
-            <Researchvessel />
-          {/if}
         </SeaPlot>
-      {/each}
+    {/each}
     </div>
   </div>
   <div class="shipview-panel">
@@ -124,11 +85,6 @@
         >
             Gulf of Alaska
         </button>
-      </div>
-      <div class="vessel-container">
-        {#if vesselPosition === null}
-          <Researchvessel />
-        {/if}
       </div>
     </div>
   </div>
