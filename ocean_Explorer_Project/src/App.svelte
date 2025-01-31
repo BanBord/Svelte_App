@@ -1,7 +1,7 @@
 <script>
   import { push } from "svelte-spa-router";
   import Router from "svelte-spa-router";
-  import { activeMission } from './stores/store_mission.js';
+  import { activeMission } from './stores/missionStore.js';
   import { onMount } from 'svelte';
 
   // Import the subpages

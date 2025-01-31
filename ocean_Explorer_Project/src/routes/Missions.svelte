@@ -1,160 +1,87 @@
 <script>
-  import { activeMission } from '../stores/store_mission.js';
+  import { activeMission } from '../stores/missionStore';
+  import { missions } from '../stores/missionStore';
   import { get } from 'svelte/store';
 
-  function activateMission(mission) {
-    activeMission.set(mission);
+  function setActiveMission(missionId) {
+    activeMission.set(missionId);
   }
 </script>
 
 <div class="content">
-  <div class="mission-1 {get(activeMission) === 1 ? 'active' : ''}">
-        <div class="mission-content">
-            <h2>Mission 1</h2>
-            <div class="mission-description">
-                <p>Die Mission 1 führt uns in die Deutsche Ostsee. Hier untersuchen wir die Fischpopulation.</p>
+  {#each Object.values(missions) as mission}
+    <div class="mission-card {get(activeMission) === mission.id ? 'active' : ''}">
+      <div class="mission-content">
+        <h2>{mission.title}</h2>
+        <div class="mission-description">
+          <p>{mission.description}</p>
+          {#if get(activeMission) === mission.id}
+            <div class="mission-details">
+              <h3>Hints:</h3>
+              <ul>
+                {#each mission.hints as hint}
+                  <li>{hint}</li>
+                {/each}
+              </ul>
+              <h3>Objectives:</h3>
+              <ul>
+                {#each mission.objectives as objective}
+                  <li>{objective}</li>
+                {/each}
+              </ul>
             </div>
-            <div id="fish-outline-1"></div>
-            <button on:click={() => activateMission(1)}>Activate Mission 1</button>
+          {/if}
         </div>
+        <button 
+          class="mission-button"
+          on:click={() => setActiveMission(mission.id)}
+        >
+          {get(activeMission) === mission.id ? 'Active' : 'Start Mission'}
+        </button>
+      </div>
     </div>
-    <div class="mission-2 {get(activeMission) === 2 ? 'active' : ''}">
-        <div class="mission-content">
-            <h2>Mission 2</h2>
-            <div class="mission-description">
-                <p>Die Mission 2 führt uns in den Golf von Alaska. Hier untersuchen wir die Auswirkungen des Klimawandels auf die Fischpopulation und die Meeresumwelt.</p>
-            </div>
-            <div id="fish-outline-2"></div>
-            <button on:click={() => activateMission(2)}>Activate Mission 2</button>
-        </div>
-    </div>
-    <div class="mission-3 {get(activeMission) === 3 ? 'active' : ''}">
-        <div class="mission-content">
-            <h2>Mission 3</h2>
-            <div class="mission-description">
-                <p>Die Mission 3 führt uns in die Andaman-See. Hier untersuchen wir die heimische Tierwelt.</p>
-            </div>
-            <div id="fish-outline-3"></div>
-            <button on:click={() => activateMission(3)}>Activate Mission 3</button>
-        </div>
-    </div>
+  {/each}
 </div>
 
 <style>
-.content{
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 1rem;
+  .content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
   }
 
-  .mission-1, .mission-2, .mission-3 {
-  background-color: #f0f0f0;
-  padding: 1.5rem;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
+  .mission-card {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
   }
 
-  .mission-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  .mission-card.active {
+    background: #e0f7fa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
-  h2 {
-  margin: 0;
-  padding-bottom: 0.5rem;
+  .mission-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.5);
+    border-radius: 8px;
   }
 
-  .mission-description p {
-  margin: 0;
-  line-height: 1.4;
+  .mission-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
   }
 
-  .mission-1{
-  grid-column: 2 / span 2;
-  grid-row: 1 / span 2;
+  .mission-button:hover {
+    background: #1976d2;
   }
-
-  .mission-2{
-  grid-column: 4 / span 2;
-  grid-row: 1 / span 2;
-  }
-
-  .mission-3{
-  grid-column: 6 / span 2;
-  grid-row: 1 / span 2;
-  }
-
-  #fish-outline-1, #fish-outline-2, #fish-outline-3 {
-  width: 100%;
-  height: 200px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-
-  #fish-outline-1 {
-  background-image: url('/fish-silluettes/Flunder.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  }
-
-  #fish-outline-2 {
-  background-image: url('/fish-silluettes/Kabeljau.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  }
-
-  #fish-outline-3 {
-  background-image: url('/fish-silluettes/Baracuda.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  }
-
-  .mission-1.active, .mission-2.active, .mission-3.active {
-  border: 2px solid #007BFF;
-  animation: pulse 1s infinite;
-  }
-
-  @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-  }
-  }
-
-  button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  }
-
-  button:hover {
-  background-color: #0056b3;
-  }
-
-  .mission-1.active button, .mission-2.active button, .mission-3.active button {
-  background-color: #28a745;
-  }
-
-
 </style>
