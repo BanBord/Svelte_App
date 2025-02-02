@@ -16,25 +16,34 @@
     'East China Sea': {
       colorSegments: [
         { from: 0, to: 20, color: '#A7EAE2' },
-        { from: 20, to: 100, color: '#4EACC4' },
-        { from: 100, to: 500, color: '#003366' },
-        { from: 500, to: Infinity, color: '#000033' }
+        { from: 20, to: 50, color: '#76D7C4' },
+        { from: 50, to: 100, color: '#4EACC4' },
+        { from: 100, to: 200, color: '#2E8B57' },
+        { from: 200, to: 500, color: '#003366' },
+        { from: 500, to: 1000, color: '#001F3F' },
+        { from: 1000, to: Infinity, color: '#000033' }
       ]
     },
     'Norwegian Sea': {
       colorSegments: [
-        { from: 0, to: 200, color: '#B0E2FF' },
-        { from: 200, to: 500, color: '#4682B4' },
-        { from: 500, to: 800, color: '#000080' },
-        { from: 800, to: Infinity, color: '#000033' }
+        { from: 0, to: 50, color: '#B0E2FF' },
+        { from: 50, to: 200, color: '#87CEFA' },
+        { from: 200, to: 400, color: '#4682B4' },
+        { from: 400, to: 600, color: '#4169E1' },
+        { from: 600, to: 800, color: '#000080' },
+        { from: 800, to: 1200, color: '#00004B' },
+        { from: 1200, to: Infinity, color: '#000033' }
       ]
     },
     'Gulf of Alaska': {
       colorSegments: [
-        { from: 0, to: 100, color: '#87CEEB' },
-        { from: 100, to: 300, color: '#1E90FF' },
-        { from: 300, to: 600, color: '#191970' },
-        { from: 600, to: Infinity, color: '#000033' }
+        { from: 0, to: 50, color: '#87CEEB' },
+        { from: 50, to: 100, color: '#00BFFF' },
+        { from: 100, to: 200, color: '#1E90FF' },
+        { from: 200, to: 400, color: '#0000CD' },
+        { from: 400, to: 600, color: '#191970' },
+        { from: 600, to: 1000, color: '#00008B' },
+        { from: 1000, to: Infinity, color: '#000033' }
       ]
     }
   };
