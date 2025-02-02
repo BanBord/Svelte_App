@@ -1,8 +1,7 @@
 <script>
-  import SeaPlot from "../components/SeaPlot.svelte";
+  import SeaPlot from "../components/Seaplot.svelte";
   import Modal from "../components/Fish.svelte";
   import { fetchFishData, fishDataStore } from '../stores/localStore';
-  import { get } from 'svelte/store';
   
   const seaConfigs = {
     'East China Sea': { areaId: 40047 },

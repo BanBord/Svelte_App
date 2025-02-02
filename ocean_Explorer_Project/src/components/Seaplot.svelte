@@ -14,13 +14,28 @@
 
   const seaConfigs = {
     'East China Sea': {
-      colorRange: { shallow: '#708090', middle: '#4A6741', deep: '#607D8B' }
+      colorSegments: [
+        { from: 0, to: 20, color: '#A7EAE2' },
+        { from: 20, to: 100, color: '#4EACC4' },
+        { from: 100, to: 500, color: '#003366' },
+        { from: 500, to: Infinity, color: '#000033' }
+      ]
     },
     'Norwegian Sea': {
-      colorRange: { shallow: '#A7EAE2', middle: '#A7EAE2', deep: '#003366' }
+      colorSegments: [
+        { from: 0, to: 200, color: '#B0E2FF' },
+        { from: 200, to: 500, color: '#4682B4' },
+        { from: 500, to: 800, color: '#000080' },
+        { from: 800, to: Infinity, color: '#000033' }
+      ]
     },
     'Gulf of Alaska': {
-      colorRange: { shallow: '#4EACC4', middle: '#0077BE', deep: '#003366' }
+      colorSegments: [
+        { from: 0, to: 100, color: '#87CEEB' },
+        { from: 100, to: 300, color: '#1E90FF' },
+        { from: 300, to: 600, color: '#191970' },
+        { from: 600, to: Infinity, color: '#000033' }
+      ]
     }
   };
 
@@ -52,9 +67,9 @@
       scientificName: cell.species,
       depth: cell.depth
     };
-    const { shallow, middle, deep } = config.colorRange;
-    depthColor = getDepthColor(depth, shallow, middle, deep, region);
-    console.log(`Calculated depthColor: ${depthColor}`);
+
+    // Choose the color based on discrete depth segments.
+    depthColor = getDepthColor(depth);
   }
 
   function handleClick() {
@@ -67,47 +82,23 @@
     isModalOpen = false;
   }
 
-  function getDepthColor(depth, shallow, middle, deep, region) {
-    const maxRegionDepth = Math.max(...region.depths.flat().map(cell => {
-      if (typeof cell.depth !== 'number') {
-        console.error(`Invalid depth value in region: ${cell.depth}`);
-        return 0;
-      }
-      return Math.abs(cell.depth);
-    }));
+  function getDepthColor(depth) {
+    const config = seaConfigs[seaVariant];
+    if (!config || !config.colorSegments) return '#B0C4DE';
+    
     const absDepth = Math.abs(depth);
-
-    console.log(`maxRegionDepth: ${maxRegionDepth}, absDepth: ${absDepth}`);
-
-    const hexToRgb = (hex) => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : null;
-    };
-
-    const interpolateColors = (color1, color2, progress) => {
-      const rgb1 = hexToRgb(color1);
-      const rgb2 = hexToRgb(color2);
-      console.log(`rgb1: ${JSON.stringify(rgb1)}, rgb2: ${JSON.stringify(rgb2)}, progress: ${progress}`);
-      const r = Math.round(rgb1.r + (rgb2.r - rgb1.r) * progress);
-      const g = Math.round(rgb1.g + (rgb2.g - rgb1.g) * progress);
-      const b = Math.round(rgb1.b + (rgb2.b - rgb1.b) * progress);
-      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-    };
-
-    if (absDepth <= maxRegionDepth / 2) {
-      const progress = absDepth / (maxRegionDepth / 2);
-      return interpolateColors(shallow, middle, progress);
-    } else {
-      const progress = (absDepth - maxRegionDepth / 2) / (maxRegionDepth / 2);
-      return interpolateColors(middle, deep, progress);
+    // Find the segment in which the absolute depth falls.
+    for (const seg of config.colorSegments) {
+      if (absDepth >= seg.from && absDepth < seg.to) {
+        return seg.color;
+      }
     }
+    return config.colorSegments[config.colorSegments.length - 1].color;
   }
 
-  onMount(calculateDepth);
+  onMount(() => {
+    calculateDepth();
+  });
 
   $: if (seaVariant && position) {
     calculateDepth();
