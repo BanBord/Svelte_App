@@ -36,18 +36,15 @@
 <main>
   <header>
     <div class="logo">
-      <a on:click={() => push("/")}>
-        <img src="/path-to-your-logo.png" alt="Ocean Explorer Logo" />
-      </a>
+      <button type="button" on:click={() => push("/")} aria-label="Home" class="home-button">
+        <img src="/public/logo/oe_logo_at_1x.svg" alt="Ocean Explorer Logo" class="logo-image" />
+      </button>
     </div>
     <nav>
-      {#if currentMission}
-      <span class="active-mission">Aktive Mission: {currentMission}</span>
-    {/if}
       <button class="nav-button" on:click={() => push("/missions")}>Missionen</button>
       <button class="nav-button" on:click={() => push("/research")}>Forschung</button>
       <button class="nav-button" on:click={() => push("/journal")}>Logbuch</button>
-      <button class="nav-button" on:click={() => push("/API")}>API</button>
+      <!-- <button class="nav-button" on:click={() => push("/API")}>API</button> -->
     </nav>
   </header>
 
@@ -57,14 +54,9 @@
   </div>
 
   <footer>
-    <p>© 2025 Ocean Research Simulator</p>
+    {#if currentMission}
+    <span class="active-mission">Aktive Mission: {currentMission}</span>
+  {/if}
+    <p>© 2025 Made by Bruno Gross at HfG Schweabisch Gmuend</p>
   </footer>
 </main>
-
-<style>
-  .active-mission {
-    margin-left: 1rem;
-    font-weight: bold;
-    color: #007BFF;
-  }
-</style>

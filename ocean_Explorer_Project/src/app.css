@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: 'Lexend', sans-serif;
 }
 
 main {
@@ -13,14 +14,19 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ddd;
-    border-radius: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   footer {
     border-top: 1px solid #ddd;
+  }
+
+  .home-button {
+    background: url('/public/logo/oe_logo_at_1x.svg') no-repeat center center;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+    border: none;
+    cursor: pointer;
   }
 
   .content {
