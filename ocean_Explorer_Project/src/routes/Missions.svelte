@@ -1,14 +1,14 @@
+<!-- @format -->
 <script>
-  import { activeMission, missions } from '../stores/missionStore';
-  import { missionProgress } from '../stores/missionProgressStore';
-  import { push } from 'svelte-spa-router';
+  import { activeMission, missions } from "../stores/missionStore";
+  import { missionProgress } from "../stores/missionProgressStore";
+  import { push } from "svelte-spa-router";
 
   function setActiveMission(missionId) {
     activeMission.set(missionId);
-    push('/research');
+    push("/research");
   }
 </script>
-
 <div class="content">
   {#each Object.values(missions) as mission}
     <div class="mission-card {missionProgress[mission.id]?.completed ? 'completed' : ''}">
@@ -36,13 +36,15 @@
     </div>
   {/each}
 </div>
-
 <style>
   .content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 2rem;
+    background-image: url("/public/img/background_static/Mission_Hintergrund.png");
+    background-size: cover;
+    background-position-y: 50%;
   }
 
   .mission-card {
@@ -54,13 +56,13 @@
 
   .mission-card.completed {
     background: #e0f7fa;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .mission-details {
     margin-top: 1rem;
     padding: 1rem;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 8px;
   }
 

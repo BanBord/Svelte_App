@@ -24,7 +24,7 @@
       <div class="progress-bar-container">
         <div class="progress-bar" style="width: {($discoveredSpecies.length / 100) * 100}%"></div>
         <span>{$discoveredSpecies.length} / 100</span>
-        </div>
+      </div>
     </div>
     <div class="catch-history">
       <h2>Catch History</h2>
@@ -96,6 +96,9 @@
     grid-template-rows: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
+    background-image: url("/public/img/background_static/Journal_Hintergrund.png");
+    background-size: cover;
+    background-position-y: 50%;
   }
 
   .progress-panel,

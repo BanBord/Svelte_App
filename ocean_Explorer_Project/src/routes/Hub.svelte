@@ -4,13 +4,9 @@
 
 <div class="content">
     <div class="quests" on:click={() => push('/missions')}>Aufträge</div>
-    <div class="waters" on:click={() => push('/research')}>
-        <div class="waters-content">
-            <div style="background-color: #3498db; padding: 20px; margin: auto; width: 80%; height: 200px; display: flex; align-items: center; justify-content: center;">
-                Map Preview
-            </div>
-        </div>
-        Offene Gewässer
+    <div class="waters">
+        <h1>Ahoi Captian!</h1>
+        <p class="w-t">Welcome to Ocean Explorer!</p>
     </div>
     <div class="logbook" on:click={() => push('/journal')}>Logbuch</div>
 </div>
@@ -22,10 +18,19 @@
         grid-template-rows: repeat(2, 1fr);
         gap: 1rem;
         padding: 1rem;
+        background-image: url('/public/img/background_static/Research_Hintergrund.png');
+        background-size: cover;
+        background-position-y: 50%; 
+        
+    }
+
+    h1 {
+        font-size: 5rem;
+        color: #f7f7f7;
+
     }
 
     .quests, .waters, .logbook {
-        background-color: #f0f0f0;
         padding: 1rem;
         border: 1px solid #ddd;
         cursor: pointer;
@@ -40,11 +45,13 @@
         grid-column: 4 / span 4;
     }
 
+    .w-t {
+        font-size: 2rem;
+        color: #f7f7f7;
+    }
+
     .logbook {
         grid-column: 4 / span 4;
     }
 
-    .waters-content {
-        margin-bottom: 1rem;
-    }
 </style>
