@@ -41,9 +41,9 @@
       </button>
     </div>
     <nav>
-      <button class="nav-button" on:click={() => push("/missions")}>Missionen</button>
-      <button class="nav-button" on:click={() => push("/research")}>Forschung</button>
-      <button class="nav-button" on:click={() => push("/journal")}>Logbuch</button>
+      <button class="nav-button" on:click={() => push("/missions")}>missions</button>
+      <button class="nav-button" on:click={() => push("/research")}>research</button>
+      <button class="nav-button" on:click={() => push("/journal")}>log</button>
       <!-- <button class="nav-button" on:click={() => push("/API")}>API</button> -->
     </nav>
   </header>
