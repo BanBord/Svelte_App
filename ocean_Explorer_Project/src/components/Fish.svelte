@@ -74,17 +74,20 @@
     dispatch("close");
     wikiData = null;
   }
+
+  // Placeholder image URL
+  const placeholderImage = '/public/img/placeholder_fish.png';
 </script>
 
 {#if isOpen}
-  <div class="backdrop" on:click|self={closeModal}>
-    <div class="modal">
-      <button on:click={closeModal}>X</button>
+  <div class="modal-overlay" on:click={closeModal}>
+    <div class="modal-content" on:click|stopPropagation>
+      <button class="close-button" on:click={closeModal} aria-label="Close">&times;</button>
       {#if fishData}
-        <h2>{fishData.scientificName}</h2>
-        <p>Depth: {fishData.depth}</p>
+        <h2>{ wikiData.title}</h2>
+        <p>Depth: {fishData.depth} meters</p>
         {#if wikiData}
-          <h3>{wikiData.title}</h3>
+          <h3>{fishData.scientificName}</h3>
           {#if wikiData.thumbnail}
             <img src={wikiData.thumbnail.source} alt={wikiData.title} />
           {/if}
@@ -97,6 +100,58 @@
 {/if}
 
 <style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #f7f7f7;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .fish-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: #2196f3;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
   .backdrop {
     position: fixed;
     top: 0;

@@ -3,9 +3,9 @@
   import SeaPlot from "../components/Seaplot.svelte";
   import Modal from "../components/Fish.svelte";
   import { fetchFishData, fishDataStore } from "../stores/localStore";
+  import { push } from 'svelte-spa-router';
   import { activeMission, missions } from "../stores/missionStore";
   import { missionProgress } from "../stores/missionProgressStore";
-  import { discoveredSpecies } from "../stores/journalStore";
 
   const seaConfigs = {
     "East China Sea": { areaId: 40047 },
@@ -50,13 +50,12 @@
   <div class="sea">
     <div class="sea-content">
       {#each seaPlots as plot}
-        <SeaPlot id={plot.id} position={getGridPosition(plot.id)} seaVariant={selectedSea}></SeaPlot>
-      {/each}
+    <SeaPlot id={plot.id} position={getGridPosition(plot.id)} seaVariant={selectedSea}></SeaPlot>
+    {/each}
     </div>
   </div>
   <div class="shipview-panel">
-    <div class="ship-content">
-      <div class="mission">
+      <button type="button" class="mission" on:click={() => push('/missions')} role="button">
         {#if currentMission}
           <h2>{currentMission.title}</h2>
           <div class="objectives">
@@ -82,37 +81,10 @@
         {:else}
           <p>No active mission. Select one from Missions page.</p>
         {/if}
-      </div>
-      <div class="marine-area">
-        <h2>Marine Area</h2>
-        <button
-          type="button"
-          class="e-sea toggle-button {selectedSea === 'East China Sea' ? 'active' : ''}"
-          on:click={() => handleSeaSelection("East China Sea")}
-          on:keydown={(e) => e.key === "Enter" && handleSeaSelection("East China Sea")}
-        >
-          East China Sea
-        </button>
-        <button
-          type="button"
-          class="i-oeaz toggle-button {selectedSea === 'Norwegian Sea' ? 'active' : ''}"
-          on:click={() => handleSeaSelection("Norwegian Sea")}
-          on:keydown={(e) => e.key === "Enter" && handleSeaSelection("Norwegian Sea")}
-        >
-          Norwegian Sea
-        </button>
-        <button
-          type="button"
-          class="sou-chin-sea toggle-button {selectedSea === 'Gulf of Alaska' ? 'active' : ''}"
-          on:click={() => handleSeaSelection("Gulf of Alaska")}
-          on:keydown={(e) => e.key === "Enter" && handleSeaSelection("Gulf of Alaska")}
-        >
-          Gulf of Alaska
-        </button>
-      </div>
+      </button>
     </div>
   </div>
-</div>
+
 
 <Modal isOpen={isModalOpen} {selectedFishData} />
 <style>
@@ -129,9 +101,7 @@
 
   .shipview-panel,
   .sea {
-    background-color: #f0f0f0;
     padding: 1rem;
-    border: 1px solid #ddd;
     cursor: pointer;
     border-radius: 16px;
   }
@@ -140,6 +110,7 @@
     grid-column: 1 / span 6;
     grid-row: 1 / span 2;
     position: relative;
+    background-color: #171b28;
   }
 
   .sea-content {
@@ -164,8 +135,7 @@
   }
 
   .mission,
-  .marine-area,
-  .vessel-container {
+  .marine-area {
     background-color: #fefefe;
     padding: 20px;
     margin: 0;
@@ -175,9 +145,42 @@
     border-radius: 12px;
   }
 
-  .vessel-container {
-    margin-top: 1rem;
-    position: relative;
+  .mission {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #171b28;
+    opacity: 0.9;
+    backdrop-filter: blur(10px);
+    color: #f7f7f7;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    h3 {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+    ul{
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.2rem;
+    }
+    p {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+  }
+
+  .mission:hover {
+    background-color: #2196f3;
+    transform: translateY(-5px);
   }
 
   .marine-area {
