@@ -2,10 +2,16 @@
   import { onMount } from 'svelte';
   import depthData from '../assets/depthdata.json';
   import Fish from './Fish.svelte';
+  import { discoveredSpecies } from '../stores/journalStore';
+  import { missionProgress, checkMissionCriteria } from '../stores/missionProgressStore';
+  import { activeMission } from '../stores/missionStore';
+  import Notification from './Notification.svelte';
 
   export let id;
   export let position;
   export let seaVariant;
+  let notificationMessage = '';
+  let notificationType = 'info';
 
   let depth;
   let depthColor = '#B0C4DE';
@@ -83,6 +89,26 @@
 
   function handleClick() {
     if (currentFishData && currentFishData.scientificName) {
+      discoveredSpecies.update(species => {
+        if (!species.some(s => s.scientificName === currentFishData.scientificName)) {
+          species.push(currentFishData);
+        }
+        return species;
+      });
+
+      // Check mission criteria
+      if ($activeMission) {
+        const isComplete = checkMissionCriteria($activeMission, $discoveredSpecies);
+        if (isComplete) {
+          missionProgress.update(progress => ({
+            ...progress,
+            [$activeMission]: { completed: true, completedAt: new Date().toISOString() }
+          }));
+          notificationMessage = 'Mission Completed!';
+          notificationType = 'success';
+        }
+      }
+
       isModalOpen = true;
     }
   }
@@ -113,6 +139,10 @@
     calculateDepth();
   }
 </script>
+
+{#if notificationMessage}
+  <Notification message={notificationMessage} type={notificationType} />
+{/if}
 
 <button
   type="button"

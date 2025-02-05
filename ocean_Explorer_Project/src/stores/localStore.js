@@ -30,7 +30,7 @@ export async function fetchFishData(areaId) {
 
     // Log the depth data for the areas
     const depthData = data.results.map(fish => fish.depth);
-    console.log('Retrieved Depth Data:', depthData);
+    // console.log('Retrieved Depth Data:', depthData);
   } catch (error) {
     console.error('Fetch Error:', error); // Log any errors
     errorStore.set(error.message);

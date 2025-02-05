@@ -2,6 +2,9 @@
   import SeaPlot from "../components/Seaplot.svelte";
   import Modal from "../components/Fish.svelte";
   import { fetchFishData, fishDataStore } from '../stores/localStore';
+  import { activeMission, missions } from '../stores/missionStore';
+  import { missionProgress } from '../stores/missionProgressStore';
+  import { discoveredSpecies } from '../stores/journalStore';
   
   const seaConfigs = {
     'East China Sea': { areaId: 40047 },
@@ -25,9 +28,12 @@
     };
   }
 
-  function handleShowFishData(event) {
-    selectedFishData = event.detail.fishData;
-    isModalOpen = true;
+  $: currentMission = $activeMission ? missions[$activeMission] : null;
+  $: missionStatus = $activeMission ? $missionProgress[$activeMission] : null;
+
+  // Auto-select correct sea for mission
+  $: if (currentMission && currentMission.area !== selectedSea) {
+    handleSeaSelection(currentMission.area);
   }
 
   // Create a 16x16 grid of sea plots with unique IDs and names
@@ -56,7 +62,31 @@
   <div class="shipview-panel">
     <div class="ship-content">
       <div class="mission">
-        <h2>Mission</h2>
+        {#if currentMission}
+        <h2>{currentMission.title}</h2>
+        <div class="objectives">
+          <h3>Objectives:</h3>
+          <ul>
+            {#each currentMission.objectives as objective}
+              <li>{objective}</li>
+            {/each}
+          </ul>
+        </div>
+        <div class="hints">
+          <h3>Hints:</h3>
+          <ul>
+            {#each currentMission.hints as hint}
+              <li>{hint}</li>
+            {/each}
+          </ul>
+        </div>
+        <div class="status">
+          <h3>Status:</h3>
+          <p>{missionStatus?.completed ? '✅ Mission Completed' : '🔄 In Progress'}</p>
+        </div>
+      {:else}
+        <p>No active mission. Select one from Missions page.</p>
+      {/if}
       </div>
       <div class="marine-area">
         <h2>Marine Area</h2>
