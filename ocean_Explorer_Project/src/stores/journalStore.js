@@ -1,11 +1,17 @@
 import { writable } from 'svelte/store';
 
-// Store discovered species with their Wikipedia data
 export const discoveredSpecies = writable(
   JSON.parse(localStorage.getItem('discoveredSpecies')) || []
 );
 
-// Update localStorage when store changes
+// Save discovered species when updated
 discoveredSpecies.subscribe(value => {
   localStorage.setItem('discoveredSpecies', JSON.stringify(value));
 });
+
+export function addDiscoveredSpecies(species) {
+  discoveredSpecies.update(currentSpecies => {
+    // Preserve previous state and add new species with currentMission flag
+    return [...currentSpecies, { ...species, currentMission: true }];
+  });
+}

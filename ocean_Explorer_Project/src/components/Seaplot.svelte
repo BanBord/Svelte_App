@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import depthData from '../assets/depthdata.json';
   import Fish from './Fish.svelte';
-  import { discoveredSpecies } from '../stores/journalStore';
+  import { discoveredSpecies, addDiscoveredSpecies } from '../stores/journalStore';
   import { missionProgress, checkMissionCriteria } from '../stores/missionProgressStore';
   import { activeMission } from '../stores/missionStore';
   import Notification from './Notification.svelte';
@@ -83,20 +83,13 @@
       depth: cell.depth
     };
 
-    // Choose the color based on discrete depth segments.
     depthColor = getDepthColor(depth);
   }
 
   function handleClick() {
     if (currentFishData && currentFishData.scientificName) {
-      discoveredSpecies.update(species => {
-        if (!species.some(s => s.scientificName === currentFishData.scientificName)) {
-          species.push(currentFishData);
-        }
-        return species;
-      });
+      addDiscoveredSpecies(currentFishData);
 
-      // Check mission criteria
       if ($activeMission) {
         const isComplete = checkMissionCriteria($activeMission, $discoveredSpecies);
         if (isComplete) {
@@ -122,7 +115,6 @@
     if (!config || !config.colorSegments) return '#B0C4DE';
     
     const absDepth = Math.abs(depth);
-    // Find the segment in which the absolute depth falls.
     for (const seg of config.colorSegments) {
       if (absDepth >= seg.from && absDepth < seg.to) {
         return seg.color;

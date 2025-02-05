@@ -80,5 +80,61 @@ export const missions = {
       "Find at least 4 unique species",
       "Discover species at different depths"
     ]
+  },
+  6: {
+    id: 6,
+    title: "East China Sea Biodiversity",
+    description: "Explore the biodiversity of the East China Sea.",
+    area: "East China Sea",
+    hints: [
+      "Look in various regions",
+      "Check depths between -50m and -300m"
+    ],
+    objectives: [
+      "Find at least 6 unique species",
+      "Discover species at different depths"
+    ]
+  },
+  7: {
+    id: 7,
+    title: "Gulf of Alaska Depth Explorer",
+    description: "Explore the depths of the Gulf of Alaska.",
+    area: "Gulf of Alaska",
+    hints: [
+      "Search in deep water regions",
+      "Check depths below -300m"
+    ],
+    objectives: [
+      "Find at least 3 deep-water species",
+      "Discover species at different depths"
+    ]
+  },
+  8: {
+    id: 8,
+    title: "Norwegian Sea Species Survey",
+    description: "Conduct a species survey in the Norwegian Sea.",
+    area: "Norwegian Sea",
+    hints: [
+      "Explore various regions",
+      "Check depths between -100m and -500m"
+    ],
+    objectives: [
+      "Find at least 5 unique species",
+      "Discover species at different depths"
+    ]
+  },
+  9: {
+    id: 9,
+    title: "East China Sea Species Hunt",
+    description: "Identify a variety of species in the East China Sea.",
+    area: "East China Sea",
+    hints: [
+      "Search in both shallow and deep waters",
+      "Look for species in different regions"
+    ],
+    objectives: [
+      "Find at least 4 unique species",
+      "Discover species at different depths"
+    ]
   }
 };
