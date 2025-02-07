@@ -3,7 +3,10 @@
   import { discoveredSpecies } from '../stores/journalStore';
 
   export let isOpen = false;
-  export let fishData = null;
+  export let fishData = {
+    scientificName: '',
+    depth: 0
+  };
 
   const dispatch = createEventDispatcher();
   let wikiData = null;
@@ -84,10 +87,10 @@
     <div class="modal-content" on:click|stopPropagation>
       <button class="close-button" on:click={closeModal} aria-label="Close">&times;</button>
       {#if fishData}
-        <h2>{ wikiData.title}</h2>
+        <h2>{fishData.scientificName}</h2>
         <p>Depth: {fishData.depth} meters</p>
         {#if wikiData}
-          <h3>{fishData.scientificName}</h3>
+          <h3>{wikiData.title}</h3>
           {#if wikiData.thumbnail}
             <img src={wikiData.thumbnail.source} alt={wikiData.title} />
           {/if}

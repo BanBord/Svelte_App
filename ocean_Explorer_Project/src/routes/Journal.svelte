@@ -103,9 +103,7 @@
 
   .progress-panel,
   .journal-panel {
-    background-color: #f0f0f0;
     padding: 1rem;
-    border: 1px solid #ddd;
     cursor: pointer;
     border-radius: 16px;
   }
@@ -122,29 +120,39 @@
   .journal-panel {
     grid-column: 4 / span 8;
     grid-row: span 2;
+    height: 80vh;
   }
 
   .journal-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    padding-bottom: 2rem;
+    overflow-y: auto;
   }
 
   .species-card {
-    background: white;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .species-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
   .species-card img {
     width: 100%;
-    height: 100px;
+    height: auto;
+    max-height: 350px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 4px 4px 0 0;
   }
 
   .species-card h3 {

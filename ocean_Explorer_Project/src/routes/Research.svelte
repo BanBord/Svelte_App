@@ -13,14 +13,12 @@
     "Gulf of Alaska": { areaId: 40002 },
   };
 
-  let selectedSea = "East China Sea"; // Default selected sea
+  $: selectedSea = $activeMission ? missions[$activeMission].area : "East China Sea"; // Default selected sea
+  
   let isModalOpen = false;
-  let selectedFishData = null;
+  let FishData = null;
 
-  function handleSeaSelection(sea) {
-    selectedSea = sea;
-    fetchFishData(seaConfigs[sea].areaId);
-  }
+  $: fetchFishData(seaConfigs[selectedSea].areaId);
 
   function getGridPosition(index) {
     return {
@@ -33,18 +31,15 @@
   $: missionStatus = $activeMission ? $missionProgress[$activeMission] : null;
 
   // Auto-select correct sea for mission
-  $: if (currentMission && currentMission.area !== selectedSea) {
-    handleSeaSelection(currentMission.area);
-  }
+  // $: if (currentMission && currentMission.area !== selectedSea) {
+  //   handleSeaSelection(currentMission.area);
+  // }
 
   // Create a 16x16 grid of sea plots with unique IDs and names
   const seaPlots = Array.from({ length: 16 * 16 }, (_, index) => ({
     id: index,
     name: `Plot ${index + 1}`,
   }));
-
-  // Fetch initial fish data for the default selected sea
-  fetchFishData(seaConfigs[selectedSea].areaId);
 </script>
 <div class="content">
   <div class="sea">
@@ -86,7 +81,7 @@
   </div>
 
 
-<Modal isOpen={isModalOpen} {selectedFishData} />
+<Modal isOpen={isModalOpen} fishData={FishData} />
 <style>
   .content {
     display: grid;
@@ -111,6 +106,7 @@
     grid-row: 1 / span 2;
     position: relative;
     background-color: #171b28;
+
   }
 
   .sea-content {
@@ -180,7 +176,7 @@
 
   .mission:hover {
     background-color: #2196f3;
-    transform: translateY(-5px);
+    transform: translateY(-2px);
   }
 
   .marine-area {
