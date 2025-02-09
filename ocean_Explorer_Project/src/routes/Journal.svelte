@@ -16,6 +16,10 @@
       return 0;
     });
   }
+  
+  function filterArea(area) {
+  filteredSpecies = $discoveredSpecies.filter(species => species.area === area);
+}
 </script>
 
 <div class="content">
@@ -46,32 +50,37 @@
   <div class="journal-panel">
     <div class="search-and-journal">
       <div class="search-bar">
-        <input type="text" placeholder="Search species..." bind:value={searchQuery} />
+      <input type="text" placeholder="Search species..." bind:value={searchQuery} />
       </div>
       <div>
-        <div class="sorting-chips">
-          <button on:click={() => sortSpecies("scientificName")}>Scientific Name</button>
-          <button on:click={() => sortSpecies("depth")}>Depth</button>
-          <button on:click={() => sortSpecies("discoveredAt")}>Discovered Date</button>
-        </div>
+      <div class="sorting-chips">
+        <button on:click={() => sortSpecies("scientificName")}>Scientific Name</button>
+        <button on:click={() => sortSpecies("depth")}>Depth</button>
+        <button on:click={() => sortSpecies("discoveredAt")}>Discovered Date</button>
+        <button on:click={() => filterArea('East China Sea')}>East China Sea</button>
+        <button on:click={() => filterArea('Norwegian Sea')}>Norwegian Sea</button>
+        <button on:click={() => filterArea('Gulf of Alaska')}>Gulf of Alaska</button>
+      </div>
       </div>
       <div class="journal-grid">
-        {#each filteredSpecies as species}
+      {#each filteredSpecies as species}
         <SpeciesCard {species} />
       {/each}
       </div>
     </div>
+    </div>
   </div>
-</div>
 
-<style>
-  .sorting-chips {
+  <style>
+    .sorting-chips {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
-  }
+    padding-bottom: 4px;
+    height: auto;
+    }
 
-  .sorting-chips button {
+    .sorting-chips button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 20px;
@@ -79,17 +88,18 @@
     color: #fff;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
 
-  .sorting-chips button:hover {
+    .sorting-chips button:hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
+    }
 
-  .sorting-chips button:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+    .sorting-chips button:active {
+    background: linear-gradient(135deg, #007bff, #76c7c0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  
   .content {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -170,16 +180,15 @@
 
   .species-card img {
     width: 100%;
-    height: auto;
-    max-height: 350px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     border-radius: 4px 4px 0 0;
   }
 
   .species-card h3 {
     margin: 0.5rem 0;
     font-size: 1.2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .depth,
@@ -187,7 +196,7 @@
   .discovered {
     font-size: 0.9rem;
     margin: 0.2rem 0;
-    text-align: center;
+    text-align: left;
   }
 
   .discovered {
@@ -222,6 +231,10 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .catch-history {
     margin-top: 1rem;
   }
 </style>
