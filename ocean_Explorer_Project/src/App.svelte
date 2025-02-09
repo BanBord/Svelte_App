@@ -39,6 +39,7 @@
       <button type="button" on:click={() => push("/")} aria-label="Home" class="home-button">
         <img src="/public/logo/oe_logo_at_1x.svg" alt="Ocean Explorer Logo" class="logo-image" />
       </button>
+      <p class="logo-title">Ocean Explorer</p>
     </div>
     <nav>
       <button class="nav-button" on:click={() => push("/missions")}>missions</button>

@@ -93,6 +93,8 @@
           <h3>{wikiData.title}</h3>
           {#if wikiData.thumbnail}
             <img src={wikiData.thumbnail.source} alt={wikiData.title} />
+            {:else}
+            <img src="/public/img/platzhalter_bild.png" alt="Placeholder image" />
           {/if}
           <p>{wikiData.description}</p>
           <p>{wikiData.extract}</p>

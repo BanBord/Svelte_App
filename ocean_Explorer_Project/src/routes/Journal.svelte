@@ -1,6 +1,7 @@
 <!-- @format -->
 <script>
   import { discoveredSpecies } from "../stores/journalStore";
+  import SpeciesCard from "../components/SpeciesCard.svelte";
   let searchQuery = "";
 
   $: filteredSpecies = $discoveredSpecies.filter((species) => species.scientificName.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -56,16 +57,8 @@
       </div>
       <div class="journal-grid">
         {#each filteredSpecies as species}
-          <div class="species-card">
-            {#if species.thumbnail}
-              <img src={species.thumbnail.source} alt={species.title} />
-            {/if}
-            <h3>{species.scientificName}</h3>
-            <p class="depth">Depth: {species.depth}m</p>
-            <p class="description">{species.description}</p>
-            <p class="discovered">Discovered: {new Date(species.discoveredAt).toLocaleDateString()}</p>
-          </div>
-        {/each}
+        <SpeciesCard {species} />
+      {/each}
       </div>
     </div>
   </div>
@@ -81,14 +74,21 @@
   .sorting-chips button {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #76c7c0, #007bff);
+    color: #fff;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .sorting-chips button:hover {
-    background-color: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .sorting-chips button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   .content {
     display: grid;
@@ -102,15 +102,36 @@
   }
 
   .progress-panel,
-  .journal-panel {
+  .journal-panel {   
     padding: 1rem;
     cursor: pointer;
     border-radius: 16px;
-  }
+    h2 {
+      margin: 0;
+      color: #e0e0e0;
+        }
+      }
 
-  .search-bar {
-    margin-bottom: 1rem;
-  }
+      .search-bar {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        outline: none;
+      }
+
+      .search-bar input:focus {
+        border-color: #76c7c0;
+        box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
+      }
 
   .progress-panel {
     grid-column: 1 / span 3;
