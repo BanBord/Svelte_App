@@ -45,7 +45,12 @@
       {/each}
     </div>
   {:else}
-    <p>Please select or create a player session to view missions.</p>
+    <div class="no-session">
+      <img src="/public/img/no-session.png" alt="No Session" class="no-session-image" />
+      <p class="no-session-text">
+        Please select or create a player session to view missions.
+      </p>
+    </div>
   {/if}
 </div>
 
@@ -160,5 +165,14 @@
 
   li {
     margin-bottom: 0.3rem;
+  }
+
+  .no-session {
+    grid-column: 2 / span 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
   }
 </style>

@@ -48,17 +48,6 @@
   }));
 </script>
 
-<!-- Optional: Show active session info -->
-{#if currentSession}
-  <div class="session-info">
-    Logged in as: {username}
-  </div>
-{:else}
-  <div class="session-info">
-    No active session. <button on:click={() => push('/login')}>Start Session</button>
-  </div>
-{/if}
-
 <div class="content">
   <div class="sea">
     <div class="sea-content">
