@@ -3,8 +3,8 @@
   export let species;
 </script>
 <div class="species-card">
-  {#if species.thumbnail}
-  <img src={species.thumbnail.source} alt={species.title || species.scientificName} class="species-image"/>
+  {#if species.thumbnail?.source}
+  <img src={species.thumbnail?.source} alt={species.title || species.scientificName} class="species-image"/>
   {:else}
     <img src="/public/img/platzhalter_bild.png" alt="Placeholder image" />
   {/if}

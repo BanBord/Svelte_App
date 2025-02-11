@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { activeSession, playerSessions } from './playerStore.js';
 
 export const discoveredSpecies = writable(
   JSON.parse(localStorage.getItem('discoveredSpecies')) || []
@@ -11,7 +12,21 @@ discoveredSpecies.subscribe(value => {
 
 export function addDiscoveredSpecies(species) {
   discoveredSpecies.update(currentSpecies => {
-    // Preserve previous state and add new species with currentMission flag
-    return [...currentSpecies, { ...species, currentMission: true }];
+    const updatedSpecies = [...currentSpecies, { ...species, currentMission: true }];
+    
+    // Update the active session's journal
+    activeSession.update(session => {
+      if (session) {
+        session.journal = [...session.journal, species];
+        // Update playerSessions with the new journal entry
+        playerSessions.update(sessions => {
+          sessions[session.id] = session;
+          return sessions;
+        });
+      }
+      return session;
+    });
+
+    return updatedSpecies;
   });
 }
