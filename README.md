@@ -1,6 +1,15 @@
-# Ocean Explorer Project
+# 🌊 Ocean Explorer Project
 
-Welcome to the Ocean Explorer Project! This project is a Svelte-based application designed to explore and study marine life across different seas. The application allows users to embark on missions, discover various fish species, and maintain a journal of their findings.
+Welcome to the Ocean Explorer Project! This interactive web application lets you dive into the fascinating world of marine life across different seas. Built with Svelte, it combines real-time data from multiple APIs to create an engaging exploration experience.
+
+## ✨ Features
+
+- 🎯 Mission-based exploration system
+- 📱 Responsive design for both mobile and desktop
+- 🗺️ Interactive sea plots for discovering marine species
+- 👤 Player session management
+- 📖 Digital journal for tracking discoveries
+- 🌐 Real-time data integration with OBIS and Wikimedia APIs
 
 ## Project Evolution
 
@@ -11,8 +20,6 @@ The project started as a simple Svelte application with basic routing and has ev
 - Integration with the OBIS API for real-time fish data
 
 ## Project Structure
-
-
 
 ### Routes
 
@@ -87,43 +94,84 @@ The project started as a simple Svelte application with basic routing and has ev
 4. **depthdata.json**
     - Contains depth and species data for different sea regions.
 
-## APIs Used
+## 🔌 API Integration
 
 ### OBIS API
+The Ocean Biogeographic Information System (OBIS) API is core to our application's functionality:
 
-The Ocean Biogeographic Information System (OBIS) API is used to fetch real-time fish occurrence data based on specific sea areas. The API provides detailed information about various fish species, including their scientific names, depths, and geographic coordinates.
+#### Key Features
+- Real-time fish occurrence data retrieval
+- Geospatial querying capabilities
+- Depth and coordinate information
+- Species taxonomic data
 
-#### How It's Used
+#### Integration Example
+```javascript
+export async function fetchOBISData(areaId, depth) {
+  const baseUrl = 'https://api.obis.org/v3/occurrence';
+  const params = new URLSearchParams({
+    areaid: areaId,
+    depth: depth,
+    size: 50,
+    fields: ['scientificName', 'depth', 'decimalLatitude', 'decimalLongitude']
+  });
 
-1. **Fetching Fish Data:**
-   - The `fetchFishData` function in `localStore.js` is used to fetch fish data from the OBIS API. It constructs the API URL using the area ID and taxon IDs and makes a GET request to retrieve the data.
-   - The fetched data is then stored in the `fishDataStore` writable store for use in the application.
+  try {
+    const response = await fetch(`${baseUrl}?${params}`);
+    const data = await response.json();
+    return data.results.map(result => ({
+      scientificName: result.scientificName,
+      depth: result.depth,
+      coordinates: [result.decimalLatitude, result.decimalLongitude]
+    }));
+  } catch (error) {
+    console.error('OBIS API Error:', error);
+    return [];
+  }
+}
+```
 
-   ```javascript
-   export async function fetchFishData(areaId) {
-     // Check if data is already in cache
-     if (fishDataCache[areaId]) {
-       fishDataStore.set(fishDataCache[areaId]);
-       return;
-     }
+#### Query Parameters
+- `areaid`: Geographic area identifier (e.g., East China Sea = 'ECS')
+- `depth`: Target depth range for species search
+- `size`: Number of results to return
+- `fields`: Specific data fields to retrieve
 
-     loadingStore.set(true);
-     errorStore.set(null);
+#### Data Processing
+The application processes OBIS data through several steps:
+1. Geographic filtering based on mission area
+2. Depth validation against mission requirements
+3. Species identification and verification
+4. Integration with local depth data grid
 
-     try {
-       const response = await fetch(`https://api.obis.org/v3/occurrence?taxonid=293496,151737&areaid=${areaId}&size=50`);
-       if (!response.ok) {
-         throw new Error(`Error: ${response.status}`);
-       }
-       const data = await response.json();
-       fishDataStore.set(data.results);
-       fishDataCache[areaId] = data.results; // Store data in cache
-     } catch (error) {
-       errorStore.set(error.message);
-     } finally {
-       loadingStore.set(false);
-     }
-   }
+### Wikimedia API
+The Wikimedia API enriches our species data with:
+- Detailed species descriptions
+- High-quality species images
+- Scientific classifications
+- Additional references
+
+Example of Wikimedia API integration:
+```javascript
+export async function fetchSpeciesDetails(speciesName) {
+  try {
+    const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${speciesName}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    return {
+      description: data.extract,
+      image: data.thumbnail ? data.thumbnail.source : null,
+      classification: data.description,
+      references: data.content_urls ? data.content_urls.desktop.page : null
+    };
+  } catch (error) {
+    console.error('Failed to fetch species details:', error);
+    return null;
+  }
+}
+```
 
 ## Getting Started
 
