@@ -19,7 +19,7 @@
     <div class="scroll-container">
       {#each Object.values(missions) as mission}
         <div
-          class="mission-card {$activeSession.missions[mission.id]?.completed ? 'completed' : ''}"
+          class="mission-card {$activeSession.missions?.[mission.id]?.completed ? 'completed' : ''}"
         >
           <h2>{mission.title}</h2>
           <p>{mission.description}</p>
@@ -31,7 +31,7 @@
               {/each}
             </ul>
           </div>
-          {#if $activeSession.missions[mission.id]?.completed}
+          {#if $activeSession.missions?.[mission.id]?.completed}
             <p class="status">✅ Completed</p>
           {:else}
             <button
@@ -55,6 +55,7 @@
 </div>
 
 <style>
+
   :root {
     --safe-area: 8px;
   }
@@ -114,8 +115,9 @@
   }
 
   .mission-card.completed {
-    background: #e0f7fa;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: rgba(32, 32, 32, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid #fa9c1b;
   }
 
   .mission-details {

@@ -4,9 +4,11 @@
   import depthData from "../assets/depthdata.json";
   import Fish from "./Fish.svelte";
   import { discoveredSpecies, addDiscoveredSpecies } from "../stores/journalStore";
-  import { missionProgress, checkMissionCriteria } from "../stores/missionProgressStore";
+  import {checkMissionCriteria } from "../stores/missionProgressStore";
   import { activeMission } from "../stores/missionStore";
   import Notification from "./Notification.svelte";
+  import { activeSession } from "../stores/playerStore";
+  
 
   export let id;
   export let position;
@@ -89,22 +91,31 @@
 
   function handleClick() {
     if (currentFishData && currentFishData.scientificName) {
-      addDiscoveredSpecies(currentFishData);
-
-      if ($activeMission) {
-        const isComplete = checkMissionCriteria($activeMission, $discoveredSpecies);
-        if (isComplete) {
-          missionProgress.update((progress) => ({
-            ...progress,
-            [$activeMission]: { completed: true, completedAt: new Date().toISOString() },
-          }));
-          notificationMessage = "Mission Completed!";
-          notificationType = "success";
-        }
-      }
-
-      isModalOpen = true;
+      handleDiscovery();
     }
+  }
+
+  function handleDiscovery() {
+    // Assuming currentFishData is defined and added to discoveries
+    addDiscoveredSpecies(currentFishData);
+
+    // Only check if a session and an active mission exist
+    if ($activeSession && $activeSession.activeMission && 
+        !($activeSession.missions?.[$activeSession.activeMission]?.completed)) {
+      const isComplete = checkMissionCriteria($activeSession.activeMission, $discoveredSpecies);
+      if (isComplete) {
+        updateMissionProgress($activeSession.activeMission, {
+          completed: true,
+          completedAt: new Date().toISOString()
+        });
+        // Clear the currentMission flag
+        discoveredSpecies.update(items =>
+          items.map(item => ({ ...item, currentMission: false }))
+        );
+        notificationMessage = "Mission Completed!";
+      }
+    }
+    isModalOpen = true;
   }
 
   function handleModalClose() {

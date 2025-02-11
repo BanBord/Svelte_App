@@ -43,9 +43,6 @@
   }));
 </script>
 
-<div class="session-info">
-  Logged in as: {username}
-</div>
 
 <div class="content">
   <div class="sea">
