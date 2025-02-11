@@ -157,4 +157,32 @@
   .missions-link:hover {
     background: #218838;
   }
+
+  /* Mobile-specific styles */
+  @media screen and (max-width: 375px) {
+    .player-panel {
+      max-width: 100%;
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+
+    .create-session input {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+
+    .create-session button,
+    .player-panel ul li button,
+    .missions-link {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+
+    .player-panel ul li {
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
+  }
 </style>

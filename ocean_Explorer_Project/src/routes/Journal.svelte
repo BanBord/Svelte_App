@@ -76,25 +76,25 @@
       </div>
     </div>
   </div>
-  {:else}
-    <div class="no-session">
-      <img src="/public/img/no-session.png" alt="No Session" class="no-session-image" />
-      <p class="no-session-text">
-        Please select or create a player session to view your journal.
-      </p>
-    </div>
-  {/if}
+{:else}
+  <div class="no-session">
+    <img src="/public/img/no-session.png" alt="No Session" class="no-session-image" />
+    <p class="no-session-text">
+      Please select or create a player session to view your journal.
+    </p>
+  </div>
+{/if}
 
-  <style>
-    .sorting-chips {
+<style>
+  .sorting-chips {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
     padding-bottom: 4px;
     height: auto;
-    }
+  }
 
-    .sorting-chips button {
+  .sorting-chips button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 20px;
@@ -103,17 +103,17 @@
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
+  }
 
-    .sorting-chips button:hover {
+  .sorting-chips button:hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
+  }
 
-    .sorting-chips button:active {
+  .sorting-chips button:active {
     background: linear-gradient(135deg, #007bff, #76c7c0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-  
+  }
+
   .content {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -130,32 +130,34 @@
     padding: 1rem;
     cursor: pointer;
     border-radius: 16px;
-    h2 {
-      margin: 0;
-      color: #e0e0e0;
-        }
-      }
+  }
 
-      .search-bar {
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-      }
+  .progress-panel h2,
+  .journal-panel h2 {
+    margin: 0;
+    color: #e0e0e0;
+  }
 
-      .search-bar input {
-        width: 100%;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        outline: none;
-      }
+  .search-bar {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
 
-      .search-bar input:focus {
-        border-color: #76c7c0;
-        box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
-      }
+  .search-bar input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+  }
+
+  .search-bar input:focus {
+    border-color: #76c7c0;
+    box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
+  }
 
   .progress-panel {
     grid-column: 1 / span 3;
@@ -163,7 +165,7 @@
   }
 
   .journal-panel {
-    grid-column: 4 / span 8;
+    grid-column: 4 / span 5;
     grid-row: span 2;
     height: 80vh;
   }
@@ -241,12 +243,6 @@
     font-size: 0.9rem;
     color: #333;
   }
-  .catch-overview {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
 
   .catch-history {
     margin-top: 1rem;
@@ -259,5 +255,29 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+  }
+
+  /* Responsive media query for mobile devices */
+  @media screen and (max-width: 375px) and (max-height: 812px) {
+    :root {
+      --safe-area: 8px;
+    }
+    .content {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: var(--safe-area);
+      padding: var(--safe-area);
+    }
+    .progress-panel,
+    .journal-panel {
+      grid-column: auto;
+      grid-row: auto;
+      padding: var(--safe-area);
+    }
+    .journal-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--safe-area);
+      padding: var(--safe-area);
+    }
   }
 </style>

@@ -79,4 +79,35 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  /* Mobile view adjustments */
+  @media screen and (max-width: 375px) and (max-height: 812px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--safe-area, 8px);
+      padding: var(--safe-area, 8px);
+      height: 100vh;
+      background-size: cover;
+    }
+    
+    .intro, .waters, .logbook {
+      grid-column: auto;
+      grid-row: auto;
+      width: 100%;
+      margin: 0;
+      padding: 0.5rem 0;
+    }
+    
+    .intro h1 {
+      font-size: 2em;
+      margin-top: 1rem;
+    }
+    
+    .intro .w-t {
+      font-size: 1em;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
 </style>

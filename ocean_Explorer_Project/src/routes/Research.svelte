@@ -5,7 +5,7 @@
   import { push } from 'svelte-spa-router';
   import { activeMission, missions } from "../stores/missionStore";
   import { missionProgress } from "../stores/missionProgressStore";
-  import { activeSession } from "../stores/playerStore"; // new import
+  import { activeSession } from "../stores/playerStore";
 
   const seaConfigs = {
     "East China Sea": { areaId: 40047 },
@@ -13,18 +13,14 @@
     "Gulf of Alaska": { areaId: 40002 },
   };
 
-  // Expose activeSession data
   $: currentSession = $activeSession;
   $: username = currentSession ? currentSession.username : "Guest";
 
-  // You might want to protect the page so that if there's no active session, 
-  // you redirect or ask the user to start one.
   if (!$activeSession) {
-    // For example, redirect to a session creation/login page
+    // Optionally redirect to login
     // push('/login');
   }
 
-  // Continue with existing mission logic
   $: selectedSea = $activeMission ? missions[$activeMission].area : "East China Sea";
   
   let isModalOpen = false;
@@ -41,12 +37,15 @@
   $: currentMission = $activeMission ? missions[$activeMission] : null;
   $: missionStatus = $activeMission ? $missionProgress[$activeMission] : null;
 
-  // Create a 16x16 grid of sea plots
   const seaPlots = Array.from({ length: 16 * 16 }, (_, index) => ({
     id: index,
     name: `Plot ${index + 1}`,
   }));
 </script>
+
+<div class="session-info">
+  Logged in as: {username}
+</div>
 
 <div class="content">
   <div class="sea">
@@ -94,29 +93,91 @@
     text-align: right;
     margin: 1rem;
     font-size: 1.2rem;
+    color: #fff;
   }
+
   .content {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
-    background-image: url("/public/img/background_static/Hub_Background.png");
+    background-image: url("/img/background_static/Hub_Background.png");
     background-size: cover;
     background-position-y: 50%;
   }
-  .sea,
-  .shipview-panel {
-    padding: 1rem;
-    cursor: pointer;
-    border-radius: 16px;
+
+  /* Desktop Layout */
+  @media (min-width: 1024px) {
+    .content {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    .sea {
+      grid-column: 1 / span 6;
+      grid-row: 1 / span 2;
+      padding: 1rem;
+      background-color: #171b28;
+      border-radius: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+    .shipview-panel {
+      grid-column: 7 / span 2;
+      grid-row: 1 / span 2;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      border-radius: 16px;
+    }
   }
-  .sea {
-    grid-column: 1 / span 6;
-    grid-row: 1 / span 2;
-    position: relative;
-    background-color: #171b28;
+
+  /* Tablet Layout */
+  @media (min-width: 600px) and (max-width: 1023px) {
+    .content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+    }
+    .sea {
+      grid-column: 1 / span 4;
+      grid-row: 1;
+      padding: 1rem;
+      background-color: #171b28;
+      border-radius: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+    .shipview-panel {
+      grid-column: 1 / span 4;
+      grid-row: 2;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      border-radius: 16px;
+    }
   }
+
+  /* Mobile Layout */
+  @media (max-width: 599px) {
+    .content {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+    .sea,
+    .shipview-panel {
+      grid-column: 1;
+      padding: 1rem;
+      border-radius: 16px;
+      background-color: #171b28;
+      cursor: pointer;
+    }
+    .shipview-panel {
+      margin-top: 1rem;
+    }
+  }
+
   .sea-content {
     width: 100%;
     height: 100%;
@@ -124,12 +185,7 @@
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
   }
-  .shipview-panel {
-    grid-column: 7 / span 2;
-    grid-row: span 2;
-    display: flex;
-    flex-direction: column;
-  }
+
   .mission {
     flex-grow: 1;
     display: flex;
@@ -145,6 +201,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
+  
   .mission:hover {
     background-color: #2196f3;
     transform: translateY(-2px);

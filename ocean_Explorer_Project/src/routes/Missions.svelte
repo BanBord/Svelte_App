@@ -55,6 +55,11 @@
 </div>
 
 <style>
+  :root {
+    --safe-area: 8px;
+  }
+
+  /* Desktop layout */
   .content {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -174,5 +179,47 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+  }
+
+  /* Mobile responsive design */
+  @media screen and (max-width: 375px) and (max-height: 812px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - (2 * var(--safe-area)));
+      padding: var(--safe-area);
+      background-image: url("/public/img/background_static/Mission_Hintergrund.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin: 1rem 0;
+      grid-column: auto;
+    }
+
+    .scroll-container {
+      grid-column: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: none;
+      overflow-y: visible;
+    }
+
+    .mission-card {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .mission-button {
+      width: 100%;
+    }
+
+    .no-session {
+      grid-column: auto;
+    }
   }
 </style>

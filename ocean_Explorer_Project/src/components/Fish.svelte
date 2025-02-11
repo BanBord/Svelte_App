@@ -187,4 +187,23 @@
     font-size: 1.5rem;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 375px) and (max-height: 812px) {
+    .modal-overlay {
+      padding: 1rem;
+      align-items: flex-end;
+    }
+    .modal-content {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 1rem;
+      border-radius: 12px 12px 0 0;
+    }
+    .close-button {
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 1.5rem;
+    }
+  }
 </style>
