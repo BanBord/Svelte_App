@@ -1,4 +1,3 @@
-<!-- @format -->
 <script>
   import { activeSession } from "../stores/playerStore.js";
   import SpeciesCard from "../components/SpeciesCard.svelte";
@@ -25,6 +24,7 @@
     filteredSpecies = sessionJournal.filter((species) => species.area === area);
   }
 </script>
+
 {#if $activeSession}
   <div class="content">
     <div class="progress-panel">
@@ -286,13 +286,12 @@
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
-      padding: 0.5rem 0;
-    }
-    .sorting-chips button {
+      .sorting-chips button {
         font-size: 0.8rem;
-        margin: 0 0.5rem;
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.8rem;
+        margin: var(--safe-area) 0;
         width: auto;
       }
+    }
   }
 </style>
