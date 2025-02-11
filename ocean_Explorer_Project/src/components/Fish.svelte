@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import { discoveredSpecies } from '../stores/journalStore';
+  import { activeSession } from "../stores/playerStore"; // <-- New import
 
   export let isOpen = false;
   export let fishData = {
@@ -20,13 +20,10 @@
     }
     return null;
   }
-
+  
   async function fetchWikiData(scientificName) {
     try {
-      // Try full scientific name first
       let data = await tryWikiSearch(scientificName);
-      
-      // If not found, try just the genus (first word)
       if (!data) {
         const genus = scientificName.split(' ')[0];
         console.log(`Falling back to genus search: ${genus}`);
@@ -46,17 +43,21 @@
     }
   }
 
+  // Updated function: save discoveries to activeSession's journal
   function saveToJournal(wikiData, fishData) {
-    discoveredSpecies.update(species => {
-      if (!species.some(s => s.scientificName === fishData.scientificName)) {
-        return [...species, { 
-          ...wikiData,
-          scientificName: fishData.scientificName,
-          depth: fishData.depth,
-          discoveredAt: new Date().toISOString()
-        }];
+    activeSession.update(session => {
+      if (session) {
+        // Prevent duplicate entries in the journal
+        if (!session.journal.some(s => s.scientificName === fishData.scientificName)) {
+          session.journal.push({ 
+            ...wikiData,
+            scientificName: fishData.scientificName,
+            depth: fishData.depth,
+            discoveredAt: new Date().toISOString()
+          });
+        }
       }
-      return species;
+      return session;
     });
   }
 

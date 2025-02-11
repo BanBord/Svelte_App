@@ -1,16 +1,21 @@
-<!-- @format -->
 <script>
-  import { discoveredSpecies } from "../stores/journalStore";
+  import { activeSession } from "../stores/playerStore.js";
   import SpeciesCard from "../components/SpeciesCard.svelte";
   let searchQuery = "";
-
-  $: filteredSpecies = $discoveredSpecies.filter((species) => species.scientificName.toLowerCase().includes(searchQuery.toLowerCase()));
-
   let sortKey = "scientificName";
+  let filteredSpecies = [];
+
+  // Update the reactive value for the current session's journal entries.
+  $: sessionJournal = $activeSession ? $activeSession.journal : [];
+
+  // When either the journal entries or searchQuery changes, update the filtered list.
+  $: filteredSpecies = sessionJournal.filter((species) =>
+    species.scientificName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   function sortSpecies(key) {
     sortKey = key;
-    filteredSpecies = [...$discoveredSpecies].sort((a, b) => {
+    filteredSpecies = [...sessionJournal].sort((a, b) => {
       if (a[sortKey] < b[sortKey]) return -1;
       if (a[sortKey] > b[sortKey]) return 1;
       return 0;
@@ -18,58 +23,62 @@
   }
   
   function filterArea(area) {
-  filteredSpecies = $discoveredSpecies.filter(species => species.area === area);
-}
+    filteredSpecies = sessionJournal.filter(species => species.area === area);
+  }
 </script>
 
-<div class="content">
-  <div class="progress-panel">
-    <div class="progress-content">
-      <h2>Progress</h2>
-      <div class="progress-bar-container">
-        <div class="progress-bar" style="width: {($discoveredSpecies.length / 100) * 100}%"></div>
-        <span>{$discoveredSpecies.length} / 100</span>
-      </div>
-    </div>
-    <div class="catch-history">
-      <h2>Catch History</h2>
-      <div class="catch-overview"></div>
-      {#if $discoveredSpecies.length > 0}
-        <div class="species-card">
-          {#if $discoveredSpecies[$discoveredSpecies.length - 1].thumbnail}
-            <img src={$discoveredSpecies[$discoveredSpecies.length - 1].thumbnail.source} alt={$discoveredSpecies[$discoveredSpecies.length - 1].title} />
-          {/if}
-          <h3>{$discoveredSpecies[$discoveredSpecies.length - 1].scientificName}</h3>
-          <p class="depth">Depth: {$discoveredSpecies[$discoveredSpecies.length - 1].depth}m</p>
-          <p class="description">{$discoveredSpecies[$discoveredSpecies.length - 1].description}</p>
-          <p class="discovered">Discovered: {new Date($discoveredSpecies[$discoveredSpecies.length - 1].discoveredAt).toLocaleDateString()}</p>
+{#if $activeSession}
+  <div class="content">
+    <div class="progress-panel">
+      <div class="progress-content">
+        <h2>Progress</h2>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: {(sessionJournal.length / 100) * 100}%"></div>
+          <span>{sessionJournal.length} / 100</span>
         </div>
-      {/if}
+      </div>
+      <div class="catch-history">
+        <h2>Catch History</h2>
+        {#if sessionJournal.length > 0}
+          <div class="species-card">
+            {#if sessionJournal[sessionJournal.length - 1].thumbnail}
+              <img src={sessionJournal[sessionJournal.length - 1].thumbnail.source} 
+                alt={sessionJournal[sessionJournal.length - 1].title} />
+            {/if}
+            <h3>{sessionJournal[sessionJournal.length - 1].scientificName}</h3>
+            <p class="depth">Depth: {sessionJournal[sessionJournal.length - 1].depth}m</p>
+            <p class="description">{sessionJournal[sessionJournal.length - 1].description}</p>
+            <p class="discovered">
+              Discovered: {new Date(sessionJournal[sessionJournal.length - 1].discoveredAt).toLocaleDateString()}
+            </p>
+          </div>
+        {/if}
+      </div>
+    </div>
+    <div class="journal-panel">
+      <div class="search-and-journal">
+        <div class="search-bar">
+          <input type="text" placeholder="Search species..." bind:value={searchQuery} />
+        </div>
+        <div class="sorting-chips">
+          <button on:click={() => sortSpecies("scientificName")}>Scientific Name</button>
+          <button on:click={() => sortSpecies("depth")}>Depth</button>
+          <button on:click={() => sortSpecies("discoveredAt")}>Discovered Date</button>
+          <button on:click={() => filterArea('East China Sea')}>East China Sea</button>
+          <button on:click={() => filterArea('Norwegian Sea')}>Norwegian Sea</button>
+          <button on:click={() => filterArea('Gulf of Alaska')}>Gulf of Alaska</button>
+        </div>
+        <div class="journal-grid">
+          {#each filteredSpecies as species}
+            <SpeciesCard {species} />
+          {/each}
+        </div>
+      </div>
     </div>
   </div>
-  <div class="journal-panel">
-    <div class="search-and-journal">
-      <div class="search-bar">
-      <input type="text" placeholder="Search species..." bind:value={searchQuery} />
-      </div>
-      <div>
-      <div class="sorting-chips">
-        <button on:click={() => sortSpecies("scientificName")}>Scientific Name</button>
-        <button on:click={() => sortSpecies("depth")}>Depth</button>
-        <button on:click={() => sortSpecies("discoveredAt")}>Discovered Date</button>
-        <button on:click={() => filterArea('East China Sea')}>East China Sea</button>
-        <button on:click={() => filterArea('Norwegian Sea')}>Norwegian Sea</button>
-        <button on:click={() => filterArea('Gulf of Alaska')}>Gulf of Alaska</button>
-      </div>
-      </div>
-      <div class="journal-grid">
-      {#each filteredSpecies as species}
-        <SpeciesCard {species} />
-      {/each}
-      </div>
-    </div>
-    </div>
-  </div>
+{:else}
+  <p>Please create or select a session to view your journal.</p>
+{/if}
 
   <style>
     .sorting-chips {

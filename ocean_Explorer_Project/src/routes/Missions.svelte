@@ -1,9 +1,13 @@
 <script>
+  import { activeSession } from "../stores/playerStore";
   import { activeMission, missions } from "../stores/missionStore";
-  import { missionProgress } from "../stores/missionProgressStore";
   import { push } from "svelte-spa-router";
 
   function setActiveMission(missionId) {
+    if (!$activeSession) {
+      alert("Please select a session first.");
+      return;
+    }
     activeMission.set(missionId);
     push("/research");
   }
@@ -11,27 +15,38 @@
 
 <div class="content">
   <h1 class="title">Missions</h1>
-  <div class="scroll-container">
-    {#each Object.values(missions) as mission}
-      <div class="mission-card {missionProgress[mission.id]?.completed ? 'completed' : ''}">
-        <h2>{mission.title}</h2>
-        <p>{mission.description}</p>
-        <div class="mission-details">
-          <h3>Objectives:</h3>
-          <ul>
-            {#each mission.objectives as objective}
-              <li>{objective}</li>
-            {/each}
-          </ul>
+  {#if $activeSession}
+    <div class="scroll-container">
+      {#each Object.values(missions) as mission}
+        <div
+          class="mission-card {$activeSession.missions[mission.id]?.completed ? 'completed' : ''}"
+        >
+          <h2>{mission.title}</h2>
+          <p>{mission.description}</p>
+          <div class="mission-details">
+            <h3>Objectives:</h3>
+            <ul>
+              {#each mission.objectives as objective}
+                <li>{objective}</li>
+              {/each}
+            </ul>
+          </div>
+          {#if $activeSession.missions[mission.id]?.completed}
+            <p class="status">✅ Completed</p>
+          {:else}
+            <button
+              class="mission-button"
+              on:click={() => setActiveMission(mission.id)}
+            >
+              Start Mission
+            </button>
+          {/if}
         </div>
-        {#if missionProgress[mission.id]?.completed}
-          <p class="status">✅ Completed</p>
-        {:else}
-          <button class="mission-button" on:click={() => setActiveMission(mission.id)}>Start Mission</button>
-        {/if}
-      </div>
-    {/each}
-  </div>
+      {/each}
+    </div>
+  {:else}
+    <p>Please select or create a player session to view missions.</p>
+  {/if}
 </div>
 
 <style>

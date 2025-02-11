@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { push } from "svelte-spa-router";
+  import PlayerPanel from "../components/PlayerPanel.svelte";
 
   let username = writable("");
 
@@ -36,7 +37,8 @@
     </div>
   </div>
   <div class="logbook">
-<button on:click={() => push('/journal')}>Go to Journal</button>
+<PlayerPanel />
+<button on:click={() => push('/missions')}>Go to Journal</button>
   </div>
 </div>
 
