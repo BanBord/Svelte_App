@@ -53,4 +53,29 @@
     margin: 0;
     color: #333;
   }
+
+  /* Mobile specific styling */
+  @media screen and (max-width: 375px) and (max-height: 812px) {
+    .species-card {
+      padding: 0.5rem;
+      width: 100%;
+      gap: 0.5rem;
+    }
+    .species-info {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+    .species-info h3 {
+      margin: 0.3rem 0;
+      font-size: 1.1rem;
+    }
+    .species-info p {
+      margin: 0.2rem 0;
+    }
+    img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+  }
 </style>

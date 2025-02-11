@@ -159,22 +159,57 @@
   }
 
   /* Mobile Layout */
-  @media (max-width: 599px) {
+  @media screen and (max-width: 425px) {
     .content {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0.5rem;
     }
-    .sea,
-    .shipview-panel {
-      grid-column: 1;
-      padding: 1rem;
-      border-radius: 16px;
+    .sea {
+      width: 100%;
+      height: 60vh; /* Reduce sea area height to make touch targets larger */
+      padding: 0.5rem;
       background-color: #171b28;
+      border-radius: 16px;
       cursor: pointer;
+      position: relative;
+    }
+    .sea-content {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr); /* Fewer columns for larger plots */
+      grid-template-rows: repeat(8, 1fr);
+      gap: 0.5rem;
+      width: 100%;
+      height: 100%;
     }
     .shipview-panel {
+      width: 100%;
+      padding: 1rem;
+      background-color: #171b28;
+      border-radius: 16px;
+      cursor: pointer;
       margin-top: 1rem;
+    }
+    .mission {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #171b28;
+      opacity: 0.9;
+      backdrop-filter: blur(10px);
+      color: #f7f7f7;
+      padding: 0.8rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .mission:hover {
+      background-color: #2196f3;
+      transform: translateY(-2px);
     }
   }
 

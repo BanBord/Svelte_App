@@ -1,3 +1,4 @@
+<!-- @format -->
 <script>
   import { activeSession } from "../stores/playerStore.js";
   import SpeciesCard from "../components/SpeciesCard.svelte";
@@ -9,9 +10,7 @@
   $: sessionJournal = $activeSession ? $activeSession.journal : [];
 
   // When either the journal entries or searchQuery changes, update the filtered list.
-  $: filteredSpecies = sessionJournal.filter((species) =>
-    species.scientificName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  $: filteredSpecies = sessionJournal.filter((species) => species.scientificName.toLowerCase().includes(searchQuery.toLowerCase()));
 
   function sortSpecies(key) {
     sortKey = key;
@@ -21,12 +20,11 @@
       return 0;
     });
   }
-  
+
   function filterArea(area) {
-    filteredSpecies = sessionJournal.filter(species => species.area === area);
+    filteredSpecies = sessionJournal.filter((species) => species.area === area);
   }
 </script>
-
 {#if $activeSession}
   <div class="content">
     <div class="progress-panel">
@@ -42,8 +40,7 @@
         {#if sessionJournal.length > 0}
           <div class="species-card">
             {#if sessionJournal[sessionJournal.length - 1].thumbnail}
-              <img src={sessionJournal[sessionJournal.length - 1].thumbnail.source} 
-                alt={sessionJournal[sessionJournal.length - 1].title} />
+              <img src={sessionJournal[sessionJournal.length - 1].thumbnail.source} alt={sessionJournal[sessionJournal.length - 1].title} />
             {/if}
             <h3>{sessionJournal[sessionJournal.length - 1].scientificName}</h3>
             <p class="depth">Depth: {sessionJournal[sessionJournal.length - 1].depth}m</p>
@@ -64,9 +61,9 @@
           <button on:click={() => sortSpecies("scientificName")}>Scientific Name</button>
           <button on:click={() => sortSpecies("depth")}>Depth</button>
           <button on:click={() => sortSpecies("discoveredAt")}>Discovered Date</button>
-          <button on:click={() => filterArea('East China Sea')}>East China Sea</button>
-          <button on:click={() => filterArea('Norwegian Sea')}>Norwegian Sea</button>
-          <button on:click={() => filterArea('Gulf of Alaska')}>Gulf of Alaska</button>
+          <button on:click={() => filterArea("East China Sea")}>East China Sea</button>
+          <button on:click={() => filterArea("Norwegian Sea")}>Norwegian Sea</button>
+          <button on:click={() => filterArea("Gulf of Alaska")}>Gulf of Alaska</button>
         </div>
         <div class="journal-grid">
           {#each filteredSpecies as species}
@@ -79,12 +76,9 @@
 {:else}
   <div class="no-session">
     <img src="/public/img/no-session.png" alt="No Session" class="no-session-image" />
-    <p class="no-session-text">
-      Please select or create a player session to view your journal.
-    </p>
+    <p class="no-session-text">Please select or create a player session to view your journal.</p>
   </div>
 {/if}
-
 <style>
   .sorting-chips {
     display: flex;
@@ -102,7 +96,10 @@
     color: #fff;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
   }
 
   .sorting-chips button:hover {
@@ -126,7 +123,7 @@
   }
 
   .progress-panel,
-  .journal-panel {   
+  .journal-panel {
     padding: 1rem;
     cursor: pointer;
     border-radius: 16px;
@@ -150,7 +147,9 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 30px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
     outline: none;
   }
 
@@ -186,7 +185,9 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .species-card:hover {
@@ -257,7 +258,7 @@
     gap: 1rem;
   }
 
-  /* Responsive media query for mobile devices */
+  /* Existing mobile rules for small devices */
   @media screen and (max-width: 375px) and (max-height: 812px) {
     :root {
       --safe-area: 8px;
@@ -275,9 +276,23 @@
       padding: var(--safe-area);
     }
     .journal-grid {
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-direction: column;
       gap: var(--safe-area);
       padding: var(--safe-area);
     }
+    /* Additional style for sorting buttons for better mobile UX */
+    .sorting-chips {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0;
+    }
+    .sorting-chips button {
+        font-size: 0.8rem;
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        width: auto;
+      }
   }
 </style>
