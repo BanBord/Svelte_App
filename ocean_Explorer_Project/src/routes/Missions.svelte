@@ -11,38 +11,71 @@
     activeMission.set(missionId);
     push("/research");
   }
+
+  let activeMissionsList = [];
+  let completedMissionsList = [];
+
+  $: if ($activeSession) {
+    const allMissions = Object.values(missions);
+    activeMissionsList = allMissions.filter(
+      (mission) => !$activeSession.missions[mission.id]?.completed
+    );
+    completedMissionsList = allMissions.filter(
+      (mission) => $activeSession.missions[mission.id]?.completed
+    );
+  }
 </script>
 
 <div class="content">
   <h1 class="title">Missions</h1>
   {#if $activeSession}
-    <div class="scroll-container">
-      {#each Object.values(missions) as mission}
-        <div
-          class="mission-card {$activeSession.missions[mission.id]?.completed ? 'completed' : ''}"
-        >
-          <h2>{mission.title}</h2>
-          <p>{mission.description}</p>
-          <div class="mission-details">
-            <h3>Objectives:</h3>
-            <ul>
-              {#each mission.objectives as objective}
-                <li>{objective}</li>
-              {/each}
-            </ul>
-          </div>
-          {#if $activeSession.missions[mission.id]?.completed}
-            <p class="status">✅ Completed</p>
-          {:else}
-            <button
-              class="mission-button"
-              on:click={() => setActiveMission(mission.id)}
-            >
-              Start Mission
-            </button>
-          {/if}
+    <div class="missions-section">
+      {#if activeMissionsList.length > 0}
+        <h2>Active Missions</h2>
+        <div class="scroll-container">
+          {#each activeMissionsList as mission}
+            <div class="mission-card">
+              <h2>{mission.title}</h2>
+              <p>{mission.description}</p>
+              <div class="mission-details">
+                <h3>Objectives:</h3>
+                <ul>
+                  {#each mission.objectives as objective}
+                    <li>{objective}</li>
+                  {/each}
+                </ul>
+              </div>
+              <button
+                class="mission-button"
+                on:click={() => setActiveMission(mission.id)}
+              >
+                Start Mission
+              </button>
+            </div>
+          {/each}
         </div>
-      {/each}
+      {/if}
+
+      {#if completedMissionsList.length > 0}
+        <h2>Completed Missions</h2>
+        <div class="scroll-container">
+          {#each completedMissionsList as mission}
+            <div class="mission-card completed">
+              <h2>{mission.title}</h2>
+              <p>{mission.description}</p>
+              <div class="mission-details">
+                <h3>Objectives:</h3>
+                <ul>
+                  {#each mission.objectives as objective}
+                    <li>{objective}</li>
+                  {/each}
+                </ul>
+              </div>
+              <p class="status">✅ Completed</p>
+            </div>
+          {/each}
+        </div>
+      {/if}
     </div>
   {:else}
     <div class="no-session">
@@ -59,11 +92,9 @@
     --safe-area: 8px;
   }
 
-  /* Desktop layout */
   .content {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     background-image: url("/public/img/background_static/Mission_Hintergrund.png");
     background-size: cover;
@@ -71,19 +102,32 @@
   }
 
   .title {
-    grid-column: 2 / span 6;
     color: #fa9c1b;
     font-size: 4rem;
     margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .missions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .missions-section h2 {
+    color: #fa9c1b;
+    margin: 1rem 0;
+    font-size: 2rem;
+    text-align: center;
   }
 
   .scroll-container {
-    grid-column: 2 / span 6;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     max-height: 80vh;
     overflow-y: auto;
+    justify-content: center;
   }
 
   .scroll-container::-webkit-scrollbar {
@@ -111,6 +155,7 @@
     background: rgba(23, 27, 40, 0.8);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    width: 300px;
   }
 
   .mission-card.completed {
@@ -134,6 +179,7 @@
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    width: 100%;
   }
 
   .mission-button:hover {
@@ -173,7 +219,6 @@
   }
 
   .no-session {
-    grid-column: 2 / span 6;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -181,28 +226,18 @@
     gap: 1rem;
   }
 
-  /* Mobile responsive design */
   @media screen and (max-width: 375px) and (max-height: 812px) {
     .content {
-      display: flex;
-      flex-direction: column;
-      min-height: calc(100vh - (2 * var(--safe-area)));
       padding: var(--safe-area);
-      background-image: url("/public/img/background_static/Mission_Hintergrund.png");
-      background-size: cover;
       background-position: center;
     }
 
     .title {
       font-size: 2.5rem;
-      text-align: center;
       margin: 1rem 0;
-      grid-column: auto;
     }
 
     .scroll-container {
-      grid-column: auto;
-      display: flex;
       flex-direction: column;
       gap: 0.5rem;
       max-height: none;
@@ -216,10 +251,6 @@
 
     .mission-button {
       width: 100%;
-    }
-
-    .no-session {
-      grid-column: auto;
     }
   }
 </style>

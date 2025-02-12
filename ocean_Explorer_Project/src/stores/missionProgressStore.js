@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { missions } from './missionStore';
+import { completeMission } from './playerStore'; // Import the completeMission function
 
 const storedProgress = JSON.parse(localStorage.getItem('missionProgress')) || {};
 export const missionProgress = writable(storedProgress);
@@ -14,28 +15,44 @@ export function checkMissionCriteria(missionId, discoveredSpecies) {
 
     const currentMissionSpecies = discoveredSpecies.filter(s => s.currentMission);
 
+    let criteriaMet = false;
     switch (missionId) {
         case 1:
-            return validateEastChinaMission(currentMissionSpecies);
+            criteriaMet = validateEastChinaMission(currentMissionSpecies);
+            break;
         case 2:
-            return validateAlaskaMission(currentMissionSpecies);
+            criteriaMet = validateAlaskaMission(currentMissionSpecies);
+            break;
         case 3:
-            return validateNorwegianMission(currentMissionSpecies);
+            criteriaMet = validateNorwegianMission(currentMissionSpecies);
+            break;
         case 4:
-            return validateEastChinaDepthChallenge(currentMissionSpecies);
+            criteriaMet = validateEastChinaDepthChallenge(currentMissionSpecies);
+            break;
         case 5:
-            return validateAlaskaSpeciesHunt(currentMissionSpecies);
+            criteriaMet = validateAlaskaSpeciesHunt(currentMissionSpecies);
+            break;
         case 6:
-            return validateEastChinaBiodiversity(currentMissionSpecies);
+            criteriaMet = validateEastChinaBiodiversity(currentMissionSpecies);
+            break;
         case 7:
-            return validateAlaskaDepthExplorer(currentMissionSpecies);
+            criteriaMet = validateAlaskaDepthExplorer(currentMissionSpecies);
+            break;
         case 8:
-            return validateNorwegianSpeciesSurvey(currentMissionSpecies);
+            criteriaMet = validateNorwegianSpeciesSurvey(currentMissionSpecies);
+            break;
         case 9:
-            return validateEastChinaSpeciesHunt(currentMissionSpecies);
+            criteriaMet = validateEastChinaSpeciesHunt(currentMissionSpecies);
+            break;
         default:
-            return false;
+            criteriaMet = false;
     }
+
+    if (criteriaMet) {
+        completeMission(missionId); // Call completeMission if criteria are met
+    }
+
+    return criteriaMet;
 }
 
 function validateEastChinaMission(discoveries) {

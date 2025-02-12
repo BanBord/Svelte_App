@@ -35,3 +35,17 @@ export function selectSession(sessionId) {
         return sessions;
     });
 }
+
+export function completeMission(missionId) {
+    activeSession.update(session => {
+        if (session) {
+            session.missions[missionId] = { completed: true };
+            // Also update the session in the global playerSessions store
+            playerSessions.update(sessions => {
+                sessions[session.id].missions[missionId] = { completed: true };
+                return sessions;
+            });
+        }
+        return session;
+    });
+}

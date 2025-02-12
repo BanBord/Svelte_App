@@ -60,9 +60,6 @@
     </div>
 
     <footer>
-      {#if currentMission}
-        <span class="active-mission">Aktive Mission: {currentMission}</span>
-      {/if}
       <p>© 2025 Made by Bruno Gross at HfG Schweabisch Gmuend</p>
     </footer>
 </main>
